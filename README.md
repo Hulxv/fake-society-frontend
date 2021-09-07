@@ -17,7 +17,7 @@
 
 ---
 
-## Techonologies
+## Technologies
 
 - Nextjs
 - Tailwindcss
@@ -28,4 +28,4 @@
 ## Libraries
 
 - Fontawesome
-- react-hook-from
+- react-hook-form
