@@ -65,7 +65,7 @@ export default function Signin() {
 					</div>
 
 					<p className={'text-xs text-left cursor-pointer hover:text-indigo-800'}>
-						Don't have an account ?
+						{"Don't have an account ?"}					
 					</p>
 			</form>
 			
