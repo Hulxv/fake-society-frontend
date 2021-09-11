@@ -1,22 +1,14 @@
-import { faFacebook } from '@fortawesome/free-brands-svg-icons'
-import Button from '@material-ui/core/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { Button } from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-export default function Google() {
+export default function Facebook() {
 	return (
-		<div className={' ring-2 my-4 ring-indigo-700 rounded-md'}>
-			<Button 
-				fullWidth={true}
-				color={'primary'}
-			>	
-			<div className={'w-full  flex justify-start space-x-2 items-center'}>
-				<FontAwesomeIcon icon={faFacebook}  className={'w-6 text-black'}/>
-				<div className={'justify-self-center text-center text-xs'}>
-					Continue with Facebook
-				</div>
-			</div>
-			</Button>
-		</div>
-	)
+		<Button
+			colorScheme={"facebook"}
+			leftIcon={<FontAwesomeIcon icon={faFacebook} className={"w-6"} />}
+			width={"250px"}>
+			Continue with Facebook
+		</Button>
+	);
 }

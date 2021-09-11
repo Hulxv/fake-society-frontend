@@ -21,7 +21,7 @@
 
 - Nextjs
 - Tailwindcss
-- Material UI
+- Chakra UI
 
 ---
 
