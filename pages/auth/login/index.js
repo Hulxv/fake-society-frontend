@@ -11,11 +11,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faEye,
 	faEyeSlash,
-	faFingerprint,
+	faKey,
+
 } from "@fortawesome/free-solid-svg-icons";
+
+
 
 export default function Signin() {
 	const [seePassword, setSeePassword] = useState(false);
+
+
 	return (
 		<div className={" h-screen items-center flex justify-center"}>
 			<form
@@ -24,9 +29,9 @@ export default function Signin() {
 				}>
 				<div
 					className={
-						"w-12 p-2 rounded-2xl text-white bg-indigo-700 flex justify-center items-center"
+						"p-2 rounded-2xl bg-black flex justify-center items-center bg-opacity-10"
 					}>
-					<FontAwesomeIcon icon={faFingerprint} className={"w-8"} />
+					<FontAwesomeIcon icon={faKey} size={'3x'} className={'opacity-80'}/>
 				</div>
 				<Heading as={"h5"}>Login</Heading>
 				<div className={"flex flex-col items-center space-y-4"}>
