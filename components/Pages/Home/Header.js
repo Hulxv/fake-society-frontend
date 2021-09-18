@@ -29,7 +29,7 @@ export default function Header() {
 							colorScheme={'gray'}
 						/>
 						<InputRightElement>
-							<IconButton icon={<GrSearch/>}/>
+							<IconButton icon={<GrSearch/>} variant={'ghost'}/>
 						</InputRightElement>
 					</InputGroup>
 					<div className={''}>

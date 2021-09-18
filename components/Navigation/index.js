@@ -1,5 +1,5 @@
-import { useState } from 'react' 
-import { useWindowSize } from '@artifak/usewindowsize';
+import { useState, useEffect } from 'react' 
+import useWindowSize from '../../hooks/useWindowSize';
 
 // Icons
 import { 
@@ -14,8 +14,9 @@ import {
 
 
 export default function SideBar() {
-	const WindowSize = typeof window !== 'undefined' ? useWindowSize() : { innerWidth: 0} 
+	const WindowSize = useWindowSize()
 	const [SideBarIsOpen, setSideBarIsOpen] = useState(false)
+	useEffect(() => WindowSize.innerWidth < 640 && setSideBarIsOpen(false), [WindowSize] )
 	return ( 
 		<div className={'fixed z-50 p-1 left-0 bottom-0 sm:top-0 w-full sm:w-auto sm:h-screen'}>
 
@@ -35,16 +36,16 @@ export default function SideBar() {
 							
 							<div className={'flex space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100  items-center'}>
 								<HiHome size={'1.7em'}/>
-								{(SideBarIsOpen || WindowSize.innerWidth < 640) && <span>home</span>}
+								{SideBarIsOpen  && <span>home</span>}
 								
 							</div>
 							<div className={'flex space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center'}>
 								<HiUser size={'1.7em'}/>
-								{(SideBarIsOpen || WindowSize.innerWidth < 640) && <span>profile</span>}
+								{SideBarIsOpen && <span>profile</span>}
 							</div>
 							<div className={'flex space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center'}>
 								<HiUsers size={'1.7em'}/>
-								{(SideBarIsOpen || WindowSize.innerWidth < 640) && <span>Friends</span>}
+								{SideBarIsOpen && <span>Friends</span>}
 							</div>
 						</div>
 					</div>
