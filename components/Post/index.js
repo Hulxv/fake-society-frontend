@@ -28,7 +28,7 @@ export default function Post(props) {
 				</div>
 			</div>
 
-			<div className={'whitespace-pre-line self-start border-l-2 border-black border-opacity-10 pl-4 py-3 flex justify-start items-center'}>
+			<div className={'whitespace-pre-line self-start border-l-2 border-black border-opacity-20 pl-4 py-3 flex justify-start items-center'}>
 				{Content.split('\n').map((line) =>(
 					<>
 						{line}

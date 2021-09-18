@@ -1,12 +1,12 @@
 import App from "./_app";
-import { useState } from 'react'
+
 // Components
 import Navigation from '../components/Navigation'
 import Header from '../components/Pages/Home/Header'
 import Post from '../components/Post'
 import {posts} from '../data/posts.js'
 export default function Home() {
-	// const [ posts, setPosts ]
+	
 	return (
 		<div className={''}>
 			<Navigation/>
@@ -15,6 +15,7 @@ export default function Home() {
 				{
 					posts.map((post,index) => 
 							<Post
+								key={index}
 								Username={post.username}
 								Avatar={post.avatar}
 								Content={post.content }
