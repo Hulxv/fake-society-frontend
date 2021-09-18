@@ -3,32 +3,38 @@ import {
 	InputGroup,
 	InputRightElement,
 	Button,
+	IconButton
 } from '@chakra-ui/react'
 import {
 	GrNotification,
-	GrAdd
+	GrAdd,
+	GrSearch
 
 } from 'react-icons/gr'
 export default function Header() {
 	
 	return (
-		<div className={'flex flex-col items-center space-y-8'}>
+		<div className={'flex flex-col items-center space-y-8 bg-white w-full p-2'}>
 			
-			<div className={'w-full flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 pt-2'}>
-				<div className={'text-md sm:text-sm md:text-lg xl:text-xl'}>
-					<h1>
-						How are you today, Mr. <span className={'underline capitalize'}>mohamed</span> ? 
-					</h1>
-				</div>
-				<div className={'flex flex-nowrap items-center space-x-1 w-full sm:w-auto'}>
+			<div className={'w-full flex  items-center   pt-2'}>
+				
+				<div className={'flex items-center space-x-3 w-full w-full'}>
 					<div>
 						<GrNotification size={'1.2em'}/>
 					</div>
-					<Input 
-						placeHolder={'Search...'}
-						variant={'outline'}
-						colorScheme={'gray'}
-					/>
+					<InputGroup>
+						<Input 
+							placeHolder={'Search...'}
+							variant={'outline'}
+							colorScheme={'gray'}
+						/>
+						<InputRightElement>
+							<IconButton icon={<GrSearch/>}/>
+						</InputRightElement>
+					</InputGroup>
+					<div className={''}>
+						<img src="https://pbs.twimg.com/profile_images/776714243173474304/ByDDFCvI_400x400.jpg" className={'w-24 rounded-full'}/>
+					</div>
 				</div>
 
 			</div>
