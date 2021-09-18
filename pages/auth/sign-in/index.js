@@ -33,7 +33,7 @@ export default function Signin() {
 					}>
 					<FontAwesomeIcon icon={faKey} size={'3x'} className={'opacity-80'}/>
 				</div>
-				<Heading as={"h5"}>Login</Heading>
+				<Heading as={"h5"}>Sign in</Heading>
 				<div className={"flex flex-col items-center space-y-4"}>
 					<div>
 						<Providers />

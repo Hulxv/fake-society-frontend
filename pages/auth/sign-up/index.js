@@ -80,7 +80,7 @@ export default function Signin() {
 						Sign up
 					</Button>
 				</div>
-				<Link href={"/auth/login"}>
+				<Link href={"/auth/sign-in"}>
 					<a
 						className={
 							"text-xs text-left cursor-pointer hover:text-indigo-800"

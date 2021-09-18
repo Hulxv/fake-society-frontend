@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@artifak/usewindowsize@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@artifak/usewindowsize/-/usewindowsize-1.0.4.tgz#74896f940a64cfe871d839a5dc0c33e89a314ebb"
+  integrity sha512-G0YY7CG/jQJ87FaADaglreREpQsbxrixtxQIJUPHHLPyr5WYOFI86MEY419d6pZJz0AIrAJKwInppx53AnDycw==
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.12.11.tgz"

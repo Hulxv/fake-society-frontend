@@ -39,11 +39,8 @@ export default function Header() {
 					<Input
 						placeHolder={'What do you think ?'}	
 					/>
-					<InputRightElement width="4.5rem">
-						<Button leftIcon={<GrAdd/>} colorScheme={'teal'}>
-							Post
-							
-						</Button>
+					<InputRightElement >
+						<GrAdd/>
 					</InputRightElement>
 				
 				</InputGroup>

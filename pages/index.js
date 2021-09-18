@@ -1,20 +1,28 @@
 import App from "./_app";
-
+import { useState } from 'react'
 // Components
-import SideBar from '../components/SideBar'
+import Navigation from '../components/Navigation'
 import Header from '../components/Pages/Home/Header'
-
-import useWindowSize from '../hooks/useWindowSize'
-
+import Post from '../components/Post'
+import {posts} from '../data/posts.js'
 export default function Home() {
-	const windowSize = useWindowSize()
-	console.log("window size => ",windowSize)
+	// const [ posts, setPosts ]
 	return (
 		<div className={''}>
-
-			<SideBar/>
+			<Navigation/>
 			<Header/>
-
+			<div className={'flex flex-col items-center justify-center'}>
+				{
+					posts.map((post,index) => 
+							<Post
+								Username={post.username}
+								Avatar={post.avatar}
+								Content={post.content }
+							/>
+						
+					)
+				}
+			</div>
 		</div>
 	);
 }
