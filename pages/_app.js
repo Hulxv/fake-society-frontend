@@ -18,18 +18,18 @@ function App({ Component, pageProps }) {
 					content='minimum-scale=1, initial-scale=1, width=device-width'
 				/>
 
-				// Azeret Mono
+				{/*Azeret Mono*/}
 				<link rel="preconnect" href="https://fonts.googleapis.com"/>
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 				<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@500&display=swap" rel="stylesheet"/> 
 				
-				// Ubuntu
+				 {/*Ubuntu*/}
 				<link rel="preconnect" href="https://fonts.googleapis.com"/>
 				<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet"/>
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 
 
-				// Josefin Sans
+				{/*Josefin Sans*/}
 				<link rel="preconnect" href="https://fonts.googleapis.com"/>
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 				<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet"/>
