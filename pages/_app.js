@@ -2,7 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
 import "../styles/globals.css"
 import "tailwindcss/tailwind.css";
-// import 'react-medium-image-zoom/dist/styles.css'
+import 'react-medium-image-zoom/dist/styles.css'
 function App({ Component, pageProps }) {
 	return (
 		<>

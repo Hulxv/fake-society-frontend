@@ -11,7 +11,7 @@ import {
 	BiHeart,
 	BiDotsHorizontalRounded
 } from 'react-icons/bi'
-// import Zoom from 'react-medium-image-zoom'
+import Zoom from 'react-medium-image-zoom'
 
 export default function Post(props) {
 	const {AvatarImage, Username, Content, ShareDate, Images=[]} = props
@@ -45,34 +45,24 @@ export default function Post(props) {
 			
 				{
 					Images.map((img) => (
-						 {/*<Zoom
-						 				          image={{
-						 				            src:
-						 				              "https://images.unsplash.com/photo-1547043688-32b236694495?fit=crop&w=700&q=50",
-						 				            alt: "Rhone Glacier, Switzerland",
-						 				            className: "img"
-						 				          }}
-						 				          zoomImage={{
-						 				            src:
-						 				              "https://images.unsplash.com/photo-1547043688-32b236694495?fit=crop&w=1700&q=80",
-						 				            alt: "Rhone Glacier, Switzerland",
-						 				            className: "img--zoomed"
-						 				          }}
-						 				        />*/}
+						<Zoom>
+							<img src={img} alt="" className={'p-1 rounded-lg h-40'}/>
+						</Zoom>
+
 					))
 				}
 			</div>}
 
 			<div className={'w-full flex justify-evenly capitalize text-sm sm:text-base'}>
-				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-2xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
+				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
 					<BiHeart size={'1.4em'}/>
 					<span> love </span>
 				</div>
-				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-2xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
+				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
 					<BiComment size={'1.4em'}/>
 					<span> comment </span>
 				</div>
-				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-2xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
+				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
 					<BiShare size={'1.4em'}/>
 					<span> share </span>
 				</div>
