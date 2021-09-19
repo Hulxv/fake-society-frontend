@@ -11,14 +11,16 @@ export default function Home() {
 		<div className={''}>
 			<Navigation/>
 			<Header/>
-			<div className={'flex flex-col items-center justify-center'}>
+			<div className={'flex flex-col mt-4 space-y-3 items-center justify-center'}>
 				{
 					posts.map((post,index) => 
 							<Post
 								key={index}
 								Username={post.username}
-								Avatar={post.avatar}
-								Content={post.content }
+								AvatarImage={post.avatar}
+								Content={post.content}
+								ShareDate={post.date}
+								Images={post.images || null}
 							/>
 						
 					)

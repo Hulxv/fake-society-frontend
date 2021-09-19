@@ -3,11 +3,27 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-        fontFamily: {
-          'azeret-mono': ['Azeret Mono', "system-ui"],
-          'ubuntu': ['Ubuntu', 'system-ui'],
-          'josefin-sans': ['Josefin Sans', 'system-ui'],
-        },
+      fontFamily: {
+        'azeret-mono': ['Azeret Mono', "system-ui"],
+        'ubuntu': ['Ubuntu', 'system-ui'],
+        'josefin-sans': ['Josefin Sans', 'system-ui'],
+      },
+
+      width: {
+        '100': '28rem',
+        '104': '32rem',
+        '108': '36rem',
+        '112': '40rem',
+        '116': '44rem',
+        '122': '48rem',
+        '126': '52rem',
+        '130': '56rem',
+        '134': '60rem',
+        '138': '64rem',
+        '142': '68rem',
+
+
+      },
 
       colors: {
         'white_': '#E9EBF1',

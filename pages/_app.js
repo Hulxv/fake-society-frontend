@@ -2,7 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
 import "../styles/globals.css"
 import "tailwindcss/tailwind.css";
-
+// import 'react-medium-image-zoom/dist/styles.css'
 function App({ Component, pageProps }) {
 	return (
 		<>
@@ -32,7 +32,7 @@ function App({ Component, pageProps }) {
 
 			<body className={'bg-background'}>
 	
-				<div className={'font-ubuntu z-0 sm:pl-16 px-4 '}>
+				<div className={'font-ubuntu sm:pl-16 px-4 '}>
 					<ChakraProvider>
 						<Component {...pageProps} />
 					</ChakraProvider>

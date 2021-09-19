@@ -3,7 +3,8 @@ import {
 	InputGroup,
 	InputRightElement,
 	Button,
-	IconButton
+	IconButton,
+	Avatar,
 } from '@chakra-ui/react'
 import {
 	GrNotification,
@@ -11,29 +12,22 @@ import {
 	GrSearch
 
 } from 'react-icons/gr'
+
 export default function Header() {
 	
 	return (
-		<div className={'flex flex-col items-center space-y-8 bg-white w-full p-2'}>
+		<div className={'flex  flex-col items-center space-y-8 bg-white w-full p-2'}>
 			
-			<div className={'w-full flex  items-center   pt-2'}>
+			<div className={'px-5 sm:px-20 top-0 z-20 bg-white w-screen fixed flex b items-center p-2'}>
 				
-				<div className={'flex items-center space-x-3 w-full w-full'}>
-					<div>
-						<GrNotification size={'1.2em'}/>
-					</div>
-					<InputGroup>
-						<Input 
-							placeHolder={'Search...'}
-							variant={'outline'}
-							colorScheme={'gray'}
-						/>
-						<InputRightElement>
-							<IconButton icon={<GrSearch/>} variant={'ghost'}/>
-						</InputRightElement>
-					</InputGroup>
-					<div className={''}>
-						<img src="https://pbs.twimg.com/profile_images/776714243173474304/ByDDFCvI_400x400.jpg" className={'w-24 rounded-full'}/>
+				<div className={'flex items-center justify-between w-full'}>
+					
+					
+					<IconButton icon={<GrSearch size={'1.2em'}/>} variant={'ghost'}/>
+					<div className={'flex items-center space-x-3'}>
+
+						<IconButton icon={<GrNotification size={'1.2em'}/>} variant={'ghost'}/>
+						<Avatar name="Oshigaki Kisame" src="https://pbs.twimg.com/profile_images/776714243173474304/ByDDFCvI_400x400.jpg" />
 					</div>
 				</div>
 

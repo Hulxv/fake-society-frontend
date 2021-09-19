@@ -19,7 +19,7 @@ export default function useWindowSize() {
     return () => {
       window.removeEventListener("resize", changeWindowSize);
     };
-  }, []);
+  }, [isSSR && window.innerHeight]);
 
   return windowSize;
 }

@@ -1,26 +1,31 @@
+
+// Chakra ui
 import {
-	Avatar
+	Avatar,
 } from '@chakra-ui/react'
+
+// Icons
 import {
 	BiShare,
 	BiComment,
 	BiHeart,
 	BiDotsHorizontalRounded
 } from 'react-icons/bi'
+// import Zoom from 'react-medium-image-zoom'
+
 export default function Post(props) {
-	const {Avatar, Username, Content} = props
+	const {AvatarImage, Username, Content, ShareDate, Images=[]} = props
 	return (
-		<div className={'w-full md:w-8/12 flex space-y-2 flex-col items-center bg-white my-8 p-3 rounded-xl'}>
+		<div className={'w-full sm:w-104 flex space-y-2 flex-col items-center bg-white  p-3 rounded-xl'}>
 			<div className={'flex justify-between w-full'}>
 				<div className="flex space-x-2 self-start justify-start items-center ">
 					<div>
-						<img 
-							src={Avatar } 
-							alt={Username}
-							className={'w-16 h-16 align-middle rounded-full cursor-pointer'}
-						/>
+						<Avatar name={Username} src={AvatarImage} loading={"lazy"}/>
 					</div>
-					<span>{Username}</span>
+					<div className="flex flex-col items-start">
+						<span>{Username}</span>
+						<span className={'text-black text-opacity-40 text-xs'}>{ShareDate}</span>
+					</div>
 				</div>
 
 				<div className={' cursor-pointer transition duration-200 p-px h-8 w-8 flex justify-center items-center rounded-full bg-opacity-0 bg-black hover:bg-opacity-10'}>
@@ -36,21 +41,43 @@ export default function Post(props) {
 					</>
 				))}
 			</div>
+			{Images !== null && <div className=" w-full justify-center flex flex-wrap ">
+			
+				{
+					Images.map((img) => (
+						 {/*<Zoom
+						 				          image={{
+						 				            src:
+						 				              "https://images.unsplash.com/photo-1547043688-32b236694495?fit=crop&w=700&q=50",
+						 				            alt: "Rhone Glacier, Switzerland",
+						 				            className: "img"
+						 				          }}
+						 				          zoomImage={{
+						 				            src:
+						 				              "https://images.unsplash.com/photo-1547043688-32b236694495?fit=crop&w=1700&q=80",
+						 				            alt: "Rhone Glacier, Switzerland",
+						 				            className: "img--zoomed"
+						 				          }}
+						 				        />*/}
+					))
+				}
+			</div>}
 
-			<div className={'w-full flex justify-around  capitalize'}>
+			<div className={'w-full flex justify-evenly capitalize text-sm sm:text-base'}>
 				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-2xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
-					<span> react </span>
 					<BiHeart size={'1.4em'}/>
+					<span> love </span>
 				</div>
 				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-2xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
-					<span> comment </span>
 					<BiComment size={'1.4em'}/>
+					<span> comment </span>
 				</div>
 				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-2xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
-					<span> share </span>
 					<BiShare size={'1.4em'}/>
+					<span> share </span>
 				</div>
 			</div>
+
 		</div>
 	)
 }
