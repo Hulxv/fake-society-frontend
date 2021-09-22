@@ -16,7 +16,7 @@ import Zoom from 'react-medium-image-zoom'
 export default function Post(props) {
 	const {AvatarImage, Username, Content, ShareDate, Images=[]} = props
 	return (
-		<div className={'w-full sm:w-104 flex space-y-2 flex-col items-center bg-white  p-3 rounded-xl'}>
+		<div className={'w-full flex space-y-2 flex-col items-center bg-white  p-3 rounded-xl'}>
 			<div className={'flex justify-between w-full'}>
 				<div className="flex space-x-2 self-start justify-start items-center ">
 					<div>
@@ -44,9 +44,9 @@ export default function Post(props) {
 			{Images !== null && <div className=" w-full justify-center flex flex-wrap ">
 			
 				{
-					Images.map((img) => (
-						<Zoom>
-							<img src={img} alt="" className={'p-1 rounded-lg h-40'}/>
+					Images.map((img, index) => (
+						<Zoom key={index}>
+							<img src={img} alt="" className={'p-1 rounded-lg h-36 sm:h-40'}/>
 						</Zoom>
 
 					))

@@ -32,7 +32,7 @@ function App({ Component, pageProps }) {
 
 			<body className={'bg-background'}>
 	
-				<div className={'font-ubuntu sm:pl-16 px-4 '}>
+				<div className={'font-ubuntu sm:pl-16 px-4 py-20 pb-24 sm:pb-4'}>
 					<ChakraProvider>
 						<Component {...pageProps} />
 					</ChakraProvider>
