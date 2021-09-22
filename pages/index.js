@@ -52,8 +52,8 @@ export default function Home() {
 					<div className={'flex md:flex-col md:space-y-3 items-center overflow-x-auto md:overflow-x-hidden md:overflow-y-auto py-2 md:py-0'}>
 
 							{
-								friends.map((friend) => (
-									<div className={'items-center space-y-1 p-2 flex flex-col'}>
+								friends.map((friend, index) => (
+									<div className={'items-center space-y-1 p-2 flex flex-col'} key={index}>
 										<Avatar src={friend.avatar} name={friend.name}>
 											{
 												friend.isActive ? 
