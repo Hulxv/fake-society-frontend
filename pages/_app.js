@@ -1,14 +1,22 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
+
+// Styles
 import "../styles/globals.css"
+
+// Tailwindcss
 import "tailwindcss/tailwind.css";
+
+
+// Zoom Image css style
 import 'react-medium-image-zoom/dist/styles.css'
+
 function App({ Component, pageProps }) {
 	return (
 		<>
 			<Head>
 
-				<title>Social Media App</title>
+				<title>Fake Society</title>
 				<meta name='description' content='Social Media Web App' />
 				<meta
 					name='viewport'

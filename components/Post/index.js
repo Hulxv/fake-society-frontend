@@ -1,72 +1,38 @@
+import linkify from 'react-tiny-linkify'
 
-// Chakra ui
-import {
-	Avatar,
-} from '@chakra-ui/react'
+
 
 // Icons
-import {
-	BiShare,
-	BiComment,
-	BiHeart,
-	BiDotsHorizontalRounded
-} from 'react-icons/bi'
-import Zoom from 'react-medium-image-zoom'
+
+// Components
+import Images from './Images'
+import Reactions from './Reactions'
+import Head from './Head'
 
 export default function Post(props) {
-	const {AvatarImage, Username, Content, ShareDate, Images=[]} = props
+	const {AvatarImage, Username, Content, ShareDate, ImagesList= [], index} = props
+
 	return (
-		<div className={'w-full flex space-y-2 flex-col items-center bg-white  p-3 rounded-xl'}>
-			<div className={'flex justify-between w-full'}>
-				<div className="flex space-x-2 self-start justify-start items-center ">
-					<div>
-						<Avatar name={Username} src={AvatarImage} loading={"lazy"}/>
-					</div>
-					<div className="flex flex-col items-start">
-						<span>{Username}</span>
-						<span className={'text-black text-opacity-40 text-xs'}>{ShareDate}</span>
-					</div>
-				</div>
-
-				<div className={' cursor-pointer transition duration-200 p-px h-8 w-8 flex justify-center items-center rounded-full bg-opacity-0 bg-black hover:bg-opacity-10'}>
-					<BiDotsHorizontalRounded size={'1.3em'}/>
-				</div>
-			</div>
-
-			<div className={'whitespace-pre-line self-start border-l-2 border-black border-opacity-20 pl-4 py-3 flex justify-start items-center'}>
-				{Content.split('\n').map((line) =>(
-					<>
-						{line}
-						<br/>
-					</>
-				))}
-			</div>
-			{Images !== null && <div className=" w-full justify-center flex flex-wrap ">
+		<div className={'w-full text-xs sm:w-full sm:text-base flex space-y-2 flex-col items-center bg-white  p-3 rounded-xl'}>
 			
-				{
-					Images.map((img, index) => (
-						<Zoom key={index}>
-							<img src={img} alt="" className={'p-1 rounded-lg h-36 sm:h-40'}/>
-						</Zoom>
-
-					))
-				}
-			</div>}
-
-			<div className={'w-full flex justify-evenly capitalize text-sm sm:text-base'}>
-				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
-					<BiHeart size={'1.4em'}/>
-					<span> love </span>
-				</div>
-				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
-					<BiComment size={'1.4em'}/>
-					<span> comment </span>
-				</div>
-				<div className={'flex space-x-2 items-center cursor-pointer transition duration-200 p-2 px-4  rounded-xl bg-opacity-0 bg-black hover:bg-opacity-10'}>
-					<BiShare size={'1.4em'}/>
-					<span> share </span>
+			<Head Username={Username} ShareDate={ShareDate} AvatarImage={AvatarImage}/>
+			{/* Post Content */}
+			<div className={'self-start  pl-4 py-3 flex justify-start items-center'}>
+				<div className={'post-content'}>
+					{Content.split('\n') 
+							.map((line) => (
+								<>
+								{linkify(line)}
+								<br/>
+								</>
+							))
+					}
 				</div>
 			</div>
+
+			<Images ImagesList={ImagesList}/>
+			<Reactions />
+			
 
 		</div>
 	)

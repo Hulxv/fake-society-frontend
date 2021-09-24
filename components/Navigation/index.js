@@ -6,8 +6,8 @@ import {
 	HiArrowRight,
 	HiArrowLeft,
 	HiMenuAlt2,
+	HiUserGroup,
 	HiUsers,
-	HiUser,
 	HiHome,
 	HiAdjustments,
 	HiAnnotation,
@@ -34,7 +34,7 @@ export default function SideBar() {
 					</div>}
 
 					<div className={'capitalize flex sm:flex-col justify-center items-center  w-full'}>
-						<div className={'flex flex-row sm:flex-col justify-around items-center sm:items-start space-x-4 sm:space-x-0 sm:space-y-4 w-full sm:w-auto'}>
+						<div className={'flex flex-row sm:flex-col justify-around items-center sm:items-start space-x-4 sm:space-x-0 sm:space-y-4 w-full sm:w-auto bg-red>'}>
 							
 							<div className={'flex flex-col sm:flex-row sm:space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100  items-center'}>
 								<HiHome size={'1.7em'}/>
@@ -42,12 +42,12 @@ export default function SideBar() {
 								
 							</div>
 							<div className={'flex flex-col sm:flex-row sm:space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center'}>
-								<HiUser size={'1.7em'}/>
-								{(SideBarIsOpen || innerWidth < 640)  && <span className={'text-xs sm:text-base'}>profile</span>}
-							</div>
-							<div className={'flex flex-col sm:flex-row sm:space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center'}>
 								<HiUsers size={'1.7em'}/>
 								{(SideBarIsOpen || innerWidth < 640)  && <span className={'text-xs sm:text-base'}>friends</span>}
+							</div>
+							<div className={'flex flex-col sm:flex-row sm:space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center'}>
+								<HiUserGroup size={'1.7em'}/>
+								{(SideBarIsOpen || innerWidth < 640)  && <span className={'text-xs sm:text-base'}>groups</span>}
 							</div>
 							<div className={'flex flex-col sm:flex-row sm:space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center'}>
 								<HiAnnotation size={'1.7em'}/>

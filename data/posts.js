@@ -52,7 +52,8 @@ Scroll Complete changelog: `,
 				If you want to use a Block list with Deluge, open the Preferences panel, where you will find a Plugins option, a long way down the list on the left hand side; select it, then in the Plugins pane select (tick) the built in Block list plugin.
 				One source for a block list is the one that eMule uses. It can be found at http://hostex.de/1316700423.
 				The added bonus is that you can use eMule block list in other torrent clients. It has also been tested in qbittorrent.
-				Another option for a block list can be found at http://john.bitsurge.net/public/biglist.p2p.gz. `,
+				Another option for a block list can be found at 
+				http://john.bitsurge.net/public/biglist.p2p.gz . `,
 		date: new Date().toLocaleString(),
 	
 	},
