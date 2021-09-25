@@ -25,7 +25,7 @@ export default function FriendsList() {
 										<AvatarBadge boxSize=".9em" bg="red.500" />
 								}
 							</Avatar>
-							<h1 className={'text-xs truncate text-center w-20 md:w-20'}>{friend.name}</h1>
+							<h1 className={'text-xs truncate text-center w-20 md:w-24'}>{friend.name}</h1>
 						</div>
 					))
 				}

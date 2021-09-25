@@ -1,3 +1,7 @@
+import {
+	Button
+} from '@chakra-ui/react'
+
 
 import Post from "../Post"
 
@@ -7,10 +11,8 @@ import {posts} from '../../data/posts.js'
 export default function Posts() {
 	
 
-	return (
-
-		<div className={'flex flex-col  p-1 md:h-full md:overflow-y-auto mt-4 md:mt-0 space-y-3 items-center w-full scrollbar-thin'}>
-
+	return (	
+		<div className={'w-full p-1 md:p-0 pb-4 md:pb-8 flex flex-col mt-4 md:mt-0 space-y-3 items-center '}>
 			{
 				posts.map((post,index) => 
 					<Post
@@ -25,6 +27,17 @@ export default function Posts() {
 					
 				)
 			}
+			<div className={'capitalize'}>No more posts</div>
+			<Button 
+				colorScheme={'teal'} 
+				onClick={() => window.scroll({
+					  top: 100,
+					  left: 100,
+					  behavior: 'smooth'
+					})}>
+				Back To Top
+			</Button>
 		</div>
+		
 	)
 }

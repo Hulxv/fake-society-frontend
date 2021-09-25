@@ -1,3 +1,4 @@
+
 import {
 	
 	Button,
@@ -6,8 +7,13 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
+	MenuDivider,
 	Avatar,
+	
 } from '@chakra-ui/react'
+
+
+// Icons
 import {
 	GrNotification,
 	GrAdd,
@@ -22,9 +28,17 @@ import {
 	HiUser,
 	HiLogout
 } from 'react-icons/hi'
-import { posts } from '../../../data/posts'
+
+// Components
+import Notifications from './Notifications'
+import Search from './Search'
+// Data
+import { posts } from '../../data/posts'
+
+
 export default function Header() {
 	
+
 	return (
 		<div className={'flex justify-center w-screen top-0 left-0 p-1 pr-3 items-center fixed z-20'}>
 			
@@ -33,16 +47,15 @@ export default function Header() {
 				<div className={'flex items-center justify-between w-full text-white'}>
 					
 					
-					<div className={'bg-white flex items-center justify-center transition duration-100 w-10 h-10 p-2 rounded-xl cursor-pointer bg-opacity-0 hover:bg-opacity-20'}>
-						<HiSearch size={'1.2em'}/>
-					</div>
-					<div className={'text-xl font-azeret-mono underline'}>
+					
+					<Search />
+					<div className={'sm:text-xl font-azeret-mono underline'}>
 						Fake Society
 					</div>	
 					<div className={'flex items-center space-x-3 '}>
-						<div className={'bg-white flex items-center justify-center transition duration-100 w-10 h-10 p-2 rounded-xl cursor-pointer bg-opacity-0 hover:bg-opacity-20'}>
-							<HiOutlineBell size={'1.5em'}/>
-						</div>
+						
+						<Notifications />
+
 						<div className={'text-black'}>
 							<Menu>
 								<MenuButton>
@@ -56,7 +69,7 @@ export default function Header() {
 										leftIcon={<HiUser size={'1.3em'} />}>
 										Profile
 									</MenuItem>
-									<div className={' w-full border-t border-b p-1 border-black border-opacity-10'}>
+									<MenuDivider />
 									<h1 className={'pl-3 text-sm'}>Switch to</h1>  
 									{
 										posts.map((profile, index) => index < 3 && (
@@ -68,7 +81,7 @@ export default function Header() {
 											</MenuItem>
 										))
 									}
-									</div>
+									<MenuDivider/>
 									<MenuItem 
 										as={Button} 
 										variant={'ghost'}
@@ -83,7 +96,6 @@ export default function Header() {
 				</div>
 
 			</div>
-
 			
 		</div>
 	)
