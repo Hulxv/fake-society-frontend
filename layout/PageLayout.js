@@ -16,14 +16,14 @@ export default function PageLayout({children}) {
 	]
 
 	return (
-		<div className={`flex w-full  items-center flex-col md:justify-between h-auto md:items-start md:flex-row-reverse
+		<div className={`font-ubuntu bg-background flex w-full items-center flex-col md:justify-between h-full md:items-start md:flex-row-reverse
 			${
 				BlackRouterList.indexOf(Router.pathname) < 0 
-				? "sm:pl-16 px-4 py-20 pb-24 sm:pb-4"
-				: "m-8"
+				? " "
+				: ""
 			}
 		`}>
-			<div className={'w-full md:w-auto '}>
+			<div className={' w-full md:w-auto'}>
 				
 				{ BlackRouterList.indexOf(Router.pathname) < 0 &&
 					<>
@@ -38,9 +38,9 @@ export default function PageLayout({children}) {
 				}
 			</div>
 
-			<div className={'w-full'}>
+		
 				{children}
-			</div>
+			
 			
 		</div>
 	)

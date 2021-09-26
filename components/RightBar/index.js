@@ -4,21 +4,17 @@ import FriendsList from '../FriendsList'
 
 export default function RightBar() {
 	return(
-		<div className={'w-full md:w-52'}>
+		<div className={'w-auto md:w-52'}>
 
-			<div className={'md:fixed md:right-2 pt-2 md:p-8 md:pt-6 rounded-xl space-y-3 md:space-x-3 bg-white flex md:items-center md:h-126 overflow-hidden md:overflow-y-auto flex-col'}>
+			<div className={'overflow-hidden md:fixed right-1 overflow-x-auto w-full md:w-52 bg-white rounded-xl py-4 flex flex-col items-center'}>
 
 				<div className={'p-4 md:p-0'}>
 					<NewPost />
 					
 				</div>
 					
-				<h1 className={'self-center text-xl'}>Friends</h1>
-				
-					
-					<FriendsList />
-									
-
+				<h1 className={'self-center text-xl'}>Friends</h1>	
+					<FriendsList/>							
 			</div>
 		</div>
 	)

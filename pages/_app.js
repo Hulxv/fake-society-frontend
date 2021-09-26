@@ -1,6 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
 import PageLayout from '/layout/PageLayout'
+import { useRouter } from 'next/router'
+
 // Styles
 import "../styles/globals.css"
 
@@ -12,6 +14,13 @@ import "tailwindcss/tailwind.css";
 import 'react-medium-image-zoom/dist/styles.css'
 
 function App({ Component, pageProps }) {
+	const Router = useRouter()
+
+	const BlackRouterList = [
+		'/auth/sign-in',
+		'/auth/sign-up'
+	]
+
 	return (
 		<>
 			<Head>
@@ -39,13 +48,20 @@ function App({ Component, pageProps }) {
 			</Head>
 
 			
-		<body className={'font-ubuntu bg-background w-full h-full'}>
-			<ChakraProvider>
-				<PageLayout>
-					<Component {...pageProps} />
-				</PageLayout>
-			</ChakraProvider>
-		</body>
+			<body className={`font-ubuntu bg-background 
+					${
+						BlackRouterList.indexOf(Router.pathname) < 0 
+						? "sm:pl-16 px-4 py-20 pb-24 sm:pb-4"
+						: "m-8"
+					}
+				`}>
+				
+				<ChakraProvider>
+					<PageLayout>
+						<Component {...pageProps} />
+					</PageLayout>
+				</ChakraProvider>
+			</body>
 				
 
 			

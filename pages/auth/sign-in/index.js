@@ -31,9 +31,9 @@ export default function Signin() {
 
 
 	return (
-		<div className={" h-screen items-center flex justify-center"}>
+		<div className={"h-screen w-full items-center flex justify-center"}>
 			<form
-				className={"w-100 ring-1 ring-black ring-opacity-10 shadow-xl  flex flex-col items-center py-4 justify-center p-6 py-8 space-y-8 rounded-3xl"}>
+				className={"w-100 ring-1 ring-black ring-opacity-10 shadow-xl bg-white flex flex-col items-center py-4 justify-center p-6 py-8 space-y-8 rounded-3xl"}>
 				<div className={"p-2 rounded-2xl bg-black flex justify-center items-center bg-opacity-10"}>
 					<HiLockClosed size={'2em'} />
 				</div>
