@@ -13,7 +13,7 @@ export default function FriendsList() {
 	
 
 	return (
-		<div className={'border-b-2 flex md:flex-col self-center w-full overflow-x-auto md:h-100 items-center md:overflow-y-auto scrollbar-thin '}>
+		<div className={'flex md:flex-col self-center w-full overflow-x-auto md:h-100 items-center md:overflow-y-auto scrollbar-thin '}>
 				{
 					friends.map((friend, index) => (
 						<div className={'items-center space-y-1 p-2 flex flex-col'} key={index}>
