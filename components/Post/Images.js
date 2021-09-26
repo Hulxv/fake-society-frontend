@@ -38,7 +38,7 @@ import {
 	
 	
 		{ImagesList.length > 3 && <>
-		<Button onClick={onOpen}>View All Images</Button>
+		<Button onClick={onOpen} size='xs' variant="ghost">View All Images</Button>
 
 	      <Modal isOpen={isOpen} onClose={onClose}  scrollBehavior={'inside'} size={'lg'}>
 	        <ModalOverlay />

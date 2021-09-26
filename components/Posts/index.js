@@ -29,7 +29,7 @@ export default function Posts() {
 			}
 			<div className={'capitalize'}>No more posts</div>
 			<Button 
-				colorScheme={'teal'} 
+				colorScheme={'blue'} 
 				onClick={() => window.scroll({
 					  top: 100,
 					  left: 100,
