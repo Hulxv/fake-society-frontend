@@ -46,24 +46,12 @@ function App({ Component, pageProps }) {
 				
 
 			</Head>
-
-			
-			<body className={`font-ubuntu bg-background 
-					${
-						BlackRouterList.indexOf(Router.pathname) < 0 
-						? "sm:pl-16 px-4 py-20 pb-24 sm:pb-4"
-						: "m-8"
-					}
-				`}>
-				
-				<ChakraProvider>
-					<PageLayout>
-						<Component {...pageProps} />
-					</PageLayout>
-				</ChakraProvider>
-			</body>
-				
-
+		
+			<ChakraProvider>
+				<PageLayout>
+					<Component {...pageProps} />
+				</PageLayout>
+			</ChakraProvider>
 			
 		</>
 	);
