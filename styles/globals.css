@@ -1,9 +1,10 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
+* {
+  outline: none;
+}
 .post-content a {
-  @apply underline text-blue_;
+  text-decoration: underline;
+  color: #2a55c2;
+  /*color: red;*/
 
 }
 
