@@ -39,12 +39,13 @@ function App({ Component, pageProps }) {
 			</Head>
 
 			
-	
+		<body className={'font-ubuntu bg-background w-full h-full'}>
 			<ChakraProvider>
 				<PageLayout>
 					<Component {...pageProps} />
 				</PageLayout>
 			</ChakraProvider>
+		</body>
 				
 
 			
