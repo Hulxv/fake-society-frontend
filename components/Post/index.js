@@ -1,8 +1,11 @@
 import linkify from 'react-tiny-linkify'
 
+import {
+	Divider
+} from '@chakra-ui/react'
 
 
-// Icons
+
 
 // Components
 import Images from './Images'
@@ -20,17 +23,18 @@ export default function Post(props) {
 			<div className={'self-start  pl-4 py-3 flex justify-start items-center'}>
 				<div className={'post-content'}>
 					{Content.split('\n') 
-							.map((line) => (
-								<>
-								{linkify(line)}
-								<br/>
-								</>
+							.map((line, index) => (
+								<span key={index}>
+									{linkify(line)}
+									<br/>
+								</span>
 							))
 					}
 				</div>
 			</div>
 
 			<Images ImagesList={ImagesList}/>
+			<Divider/>
 			<Reactions />
 			
 

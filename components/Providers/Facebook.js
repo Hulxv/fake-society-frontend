@@ -6,7 +6,7 @@ export default function Facebook() {
 		<Button
 			colorScheme={"facebook"}
 			leftIcon={<FaFacebook size={'1.7em'} />}
-			width={"250px"}>
+			width={"300px"}>
 			Continue with Facebook
 		</Button>
 	);

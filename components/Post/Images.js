@@ -7,7 +7,7 @@ import {
 
  export default function Images(props) {
  	const {ImagesList} = props
- 	console.log(ImagesList)
+
  	return (ImagesList !== null && ImagesList.length > 0 ) && (
 	<div className=" flex flex-col items-center space-y-2 w-full">
 		<div className={'w-full justify-center flex flex-wrap'}>	

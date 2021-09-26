@@ -7,7 +7,7 @@ export default function Google() {
 		<Button
 			colorScheme={"linkedin"}
 			leftIcon={<FcGoogle size={'1.7em'} />}
-			width={"250px"}>
+			width={"300px"}>
 			Continue with Google
 		</Button>
 	);

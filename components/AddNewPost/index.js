@@ -23,6 +23,7 @@ export default function NewPost() {
         colorScheme={'blue'}
         variant={'solid'}
         onClick={onOpen}
+        
       >
         New Post
       </Button>

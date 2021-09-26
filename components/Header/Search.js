@@ -11,7 +11,12 @@ import {
   Button,
   Input,
   InputRightElement,
-  InputGroup
+  InputGroup,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanels,
+  TabPanel
 } from '@chakra-ui/react'
 import { HiSearch } from 'react-icons/hi'
 export default function Search() {
@@ -29,10 +34,16 @@ export default function Search() {
             <InputGroup>
               <Input placeHolder={'Search'} variant={'filled'}/>
               <InputRightElement>
-                <IconButton color={'blue'} icon={<HiSearch size={'1.1em'}/>}></IconButton>
+                <IconButton color={'blue'} variant={'ghost'} icon={<HiSearch size={'1.1em'}/>}></IconButton>
               </InputRightElement>  
             </InputGroup>
-           
+            <Tabs isFitted mt={4} variant={'enclosed'}>
+              <TabList>
+                <Tab>Users</Tab>
+                <Tab>Posts</Tab>
+                <Tab>Groups</Tab>
+              </TabList> 
+            </Tabs>
           </ModalBody>
 
           <ModalFooter>

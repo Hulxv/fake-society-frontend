@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
-
+import PageLayout from '/layout/PageLayout'
 // Styles
 import "../styles/globals.css"
 
@@ -38,15 +38,16 @@ function App({ Component, pageProps }) {
 
 			</Head>
 
-			<body className={'bg-background'}>
+			
 	
-				<div className={'font-ubuntu sm:pl-16 px-4 py-20 pb-24 sm:pb-4'}>
-					<ChakraProvider>
-						<Component {...pageProps} />
-					</ChakraProvider>
-				</div>
+			<ChakraProvider>
+				<PageLayout>
+					<Component {...pageProps} />
+				</PageLayout>
+			</ChakraProvider>
+				
 
-			</body>
+			
 		</>
 	);
 }

@@ -1,20 +1,29 @@
 import { useState } from "react";
 import Link from "next/link";
+
+
 // Chakra UI
-import { Input, FormLabel, Button, Heading } from "@chakra-ui/react";
+import { 
+	InputGroup, 
+	Input, 
+	InputRightElement, 
+	FormLabel, 
+	Button, 
+	Heading, 
+	Select, 
+	IconButton,
+} from "@chakra-ui/react";
 
 // Components
 import Providers from "../../../components/Providers";
 
-// Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Icons
 import {
-	faEye,
-	faEyeSlash,
-	faKey,
-
-} from "@fortawesome/free-solid-svg-icons";
-
+	HiLockClosed,
+	HiEyeOff,
+	HiEye
+} from 'react-icons/hi'
 
 
 export default function Signin() {
@@ -24,14 +33,9 @@ export default function Signin() {
 	return (
 		<div className={" h-screen items-center flex justify-center"}>
 			<form
-				className={
-					"w-96 shadow-xl flex flex-col items-center py-4 justify-center p-6 space-y-8 rounded-3xl"
-				}>
-				<div
-					className={
-						"p-2 rounded-2xl bg-black flex justify-center items-center bg-opacity-10"
-					}>
-					<FontAwesomeIcon icon={faKey} size={'3x'} className={'opacity-80'}/>
+				className={"w-100 ring-1 ring-black ring-opacity-10 shadow-xl  flex flex-col items-center py-4 justify-center p-6 py-8 space-y-8 rounded-3xl"}>
+				<div className={"p-2 rounded-2xl bg-black flex justify-center items-center bg-opacity-10"}>
+					<HiLockClosed size={'2em'} />
 				</div>
 				<Heading as={"h5"}>Sign in</Heading>
 				<div className={"flex flex-col items-center space-y-4"}>
@@ -47,21 +51,32 @@ export default function Signin() {
 						/>
 					</div>
 					<div className={"flex items-center relative "}>
-						<Input
-							placeholder='Password'
-							type={`${seePassword ? "text" : "password"}`}
-							variant={"filled"}
-							width={"300px"}
-						/>
+						<InputGroup width={300}>
+							
+							<Input
+								placeholder='Password'
+								type={`${seePassword ? "text" : "password"}`}
+								variant={"filled"}
+								
+							/>
+							<InputRightElement>
+								<IconButton
+									icon = {
+										!seePassword 
+											? <HiEye size={'1.5em'}/>
+											: <HiEyeOff size={'1.5em'}/>
+									}
+									onClick ={
+										() => setSeePassword(!seePassword)
+									}
+									variant='none'
+								/>
+							</InputRightElement>
 
-						<FontAwesomeIcon
-							icon={seePassword ? faEyeSlash : faEye}
-							className={"absolute right-1 w-5"}
-							onClick={() => setSeePassword(!seePassword)}
-						/>
+						</InputGroup>
 					</div>
 				</div>
-				<div className={"flex justify-end w-full"}>
+				<div className={"flex justify-end w-80"}>
 					<p
 						className={
 							"text-xs text-left cursor-pointer hover:text-indigo-800"
