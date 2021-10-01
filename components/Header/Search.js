@@ -31,12 +31,14 @@ export default function Search() {
           <ModalHeader>Search</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+          
             <InputGroup>
               <Input placeHolder={'Search'} variant={'filled'}/>
               <InputRightElement>
                 <IconButton color={'blue'} variant={'ghost'} icon={<HiSearch size={'1.1em'}/>}></IconButton>
               </InputRightElement>  
             </InputGroup>
+
             <Tabs isFitted mt={4} variant={'enclosed'}>
               <TabList>
                 <Tab>Users</Tab>
@@ -44,6 +46,7 @@ export default function Search() {
                 <Tab>Groups</Tab>
               </TabList> 
             </Tabs>
+
           </ModalBody>
 
           <ModalFooter>

@@ -12,7 +12,7 @@ import {
   Textarea
 } from '@chakra-ui/react'
 import { HiPlus, } from 'react-icons/hi'
-import { FaPhotoVideo } from 'react-icons/fa'
+import { FaPhotoVideo, FaCode } from 'react-icons/fa'
 export default function NewPost() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
@@ -31,19 +31,22 @@ export default function NewPost() {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>New Post</ModalHeader>
-          <ModalCloseButton />
+        
           <ModalBody>
             
-            <Textarea placeHolder={'What do you think ?'}/>
-           
-            <Button leftIcon={<FaPhotoVideo/>} variant={'solid'} mt={5}>Media</Button>
+            <Textarea placeHolder={'What do you think ?'} size={'lg'} variant={'filled'}/>
+            <div className={'space-x-2'}>
+              <Button leftIcon={<FaPhotoVideo/>} variant={'solid'} mt={5}>Media</Button>
+              <Button leftIcon={<FaCode/>} variant={'solid'} mt={5}>Code</Button>
+
+            </div>           
 
            
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3}>
-              Post
+              Share
             </Button>
 
             <Button  mr={3} variant={'ghost'} onClick={onClose}>

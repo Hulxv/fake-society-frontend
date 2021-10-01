@@ -63,11 +63,13 @@ export default function Header() {
 									
 								</MenuButton>
 								<MenuList>
-									<MenuItem 
-										as={Button} 
-										variant={'ghost'}
-										leftIcon={<HiUser size={'1.3em'} />}>
-										Profile
+									<MenuItem height={50}>
+										<div className="flex space-x-2 items-center ">
+											<HiUser size={'1.5em'} />
+											<span>
+												Profile
+											</span>
+										</div>
 									</MenuItem>
 									<MenuDivider />
 									<h1 className={'pl-3 text-sm'}>Switch to</h1>  
@@ -82,11 +84,13 @@ export default function Header() {
 										))
 									}
 									<MenuDivider/>
-									<MenuItem 
-										as={Button} 
-										variant={'ghost'}
-										leftIcon={<HiLogout size={"1.3em"}/>}>
-									Sign Out
+									<MenuItem height={50}>
+										<div className="flex space-x-2 items-center">
+											<HiLogout size={'1.5em'} />
+											<span>
+												Sign Out
+											</span>
+										</div>
 									</MenuItem>
 								</MenuList>
 							</Menu>

@@ -16,7 +16,7 @@ export default function PageLayout({children}) {
 	]
 
 	return (
-		<div className={`font-ubuntu bg-background flex w-full items-center flex-col md:justify-between h-full md:items-start md:flex-row-reverse
+		<div className={`font-ubuntu bg-background flex w-full min-h-screen items-center flex-col md:justify-between h-full md:items-start md:flex-row-reverse
 			
 			${
 				BlackRouterList.indexOf(Router.pathname) < 0 

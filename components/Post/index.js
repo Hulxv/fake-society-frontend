@@ -16,7 +16,7 @@ export default function Post(props) {
 	const {AvatarImage, Username, Content, ShareDate, ImagesList= [], index} = props
 
 	return (
-		<div className={'w-full text-xs sm:text-base flex space-y-2 flex-col items-center bg-white  p-3 rounded-xl'}>
+		<div className={'w-full shadow text-xs sm:text-base flex space-y-2 flex-col items-center bg-white  p-3 rounded-xl'}>
 			
 			<Head Username={Username} ShareDate={ShareDate} AvatarImage={AvatarImage}/>
 

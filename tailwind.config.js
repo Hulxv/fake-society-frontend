@@ -53,7 +53,7 @@ module.exports = {
           400: '#6a91a4',
           300: '#bbc6d6',
         },
-        'blue_':'#2a55c2',
+        'blue_':'#3182ce',
         'background': '#F2F2FB',
 
       }
