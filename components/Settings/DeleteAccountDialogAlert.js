@@ -14,11 +14,11 @@ import {
 import {
     HiTrash
 } from 'react-icons/hi'
-export default DeleteAccountAlertDialog() => {
+export default function DeleteAccountAlertDialog() {
     const [isOpen, setIsOpen] = useState(false);
     const [ButtonIsDisable, setButtonIsDisable] = useState(true);
     const [InputContent, setInputContent] = useState('')
-  const Toast = useToast()
+    const Toast = useToast()
 
     const onClose = () => setIsOpen(false);
     const cancelRef = useRef();
