@@ -59,7 +59,7 @@ export default function Header() {
 						<div className={'text-black'}>
 							<Menu>
 								<MenuButton>
-									<Avatar name="Oshigaki Kisame" src="https://pbs.twimg.com/profile_images/776714243173474304/ByDDFCvI_400x400.jpg" />
+									<Avatar name="Oshigaki Kisame" src={typeof window !== 'undefined' && window.localStorage.getItem('fake-society-avatar')}/>
 									
 								</MenuButton>
 								<MenuList>

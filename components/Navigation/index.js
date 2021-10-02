@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react' 
 import {useWindowSize} from "rooks";
 
-import PagesIcons from './PagesIcons'
+import NavLinks from './NavLinks'
 import Settings from '../Settings'
 
 
@@ -46,7 +46,7 @@ export default function SideBar() {
 					
 					}
 
-					<PagesIcons IsSideBarOpen={SideBarIsOpen}/> 
+					<NavLinks IsSideBarOpen={SideBarIsOpen}/> 
 
 				</div>
 				{

@@ -1,3 +1,6 @@
+import ChangeAvatar from './ChangeAvatar'
+import DeleteAccount from './DeleteAccountDialogAlert'
+
 import {
 	useEditableControls,
 	Button,
@@ -10,18 +13,19 @@ import {
 	IconButton
 } from '@chakra-ui/react'
 
+
+// Icons
 import {
 	FiEdit,
 	FiCheck
 } from 'react-icons/fi'
-
 import {
-	HiOutlineIdentification,
 	HiOutlineMail,
 	HiOutlineAtSymbol,
 	HiFingerPrint,
 	HiTrash,
-	HiOutlineBan
+	HiOutlineBan,
+	HiIdentification
 } from 'react-icons/hi'
 export default function Account() {
 
@@ -45,12 +49,11 @@ export default function Account() {
 
  	return (
 	<div className={'flex flex-col items-start space-y-6'}>
-		<div title='UID' className={'self-center p-2 flex flex-nowrap space-x-2 items-center '}>
-			<HiOutlineIdentification size={'1.5em'}/> 
-			<span>3952305739</span>
-		</div>
-		<div className={'flex items-center space-x-2'}>
-			<Avatar size="lg" name="Oshigaki Kisame" src="https://pbs.twimg.com/profile_images/776714243173474304/ByDDFCvI_400x400.jpg" />
+		
+		<div className={'flex items-center space-x-5'}>
+
+			<ChangeAvatar />
+			
 			<Editable defaultValue={"Oshigaki Kisame" }>
 			  <Flex nowrap>
 			  		<EditablePreview />
@@ -59,31 +62,17 @@ export default function Account() {
 			  </Flex>
 			</Editable>		
 		</div>
-		<div className={'flex flex-col w-full '}>
-			<Button 
-				colorScheme='blue'
-				leftIcon={<HiOutlineMail size='1.4em'/>}
-				width={200}
-			>
-				Change Email
-			</Button>
-			<Button 
-				colorScheme='blue'
-				mt={2}
-				leftIcon={<HiFingerPrint size='1.4em'/>}
-				width={200}
-			>
-				Change Password
-			</Button>
-			<Button 
-				colorScheme='red' 
-				mt={5}
-				alignSelf={'end'}
-				leftIcon={<HiTrash size='1.4em'/>}		
-			>
-				Delete Account
-			</Button>
-		</div>
+		
+			
+		<Button 
+			width={'100%'} 
+			
+			leftIcon={<HiIdentification size='1.4em'/>}		
+		>
+			Personal Informations
+		</Button>
+		<DeleteAccount/>
+		
 	</div>
  	)
  }

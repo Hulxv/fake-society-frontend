@@ -5,6 +5,7 @@ import {useWindowSize} from "rooks";
 import Apperance from './Apperance'
 import Account from './Account'
 
+
 // Chakra ui components
 import {
   Modal,
@@ -36,11 +37,11 @@ export default function Settings({ IsSideBarOpen, color }) {
 	<>
 	 
 	  	
-  	<div 
-  		className="flex  flex-row sm:flex-col  items-center capitalize"
-  		onClick={onOpen}
+  <div 
+  	className="flex flex-row sm:flex-col w-full items-center capitalize"
+  	onClick={onOpen}
 
-  	>
+  >
 		<div className={`flex flex-row space-x-2 justify-center transition duration-200 cursor-pointer ${color === 'black' ? 'text-black' : 'text-white'} text-opacity-80 hover:text-opacity-100 items-center`}>
 			<HiAdjustments size={'2em'}/>
 			{(IsSideBarOpen || innerWidth < 640)  && <span className={'text-xs sm:text-base'}>settings</span>}
