@@ -7,16 +7,19 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   Button,
-  Input
+  Input,
+  useToast,
 } from "@chakra-ui/react"
 
 import {
     HiTrash
 } from 'react-icons/hi'
-export default () => {
+export default DeleteAccountAlertDialog() => {
     const [isOpen, setIsOpen] = useState(false);
     const [ButtonIsDisable, setButtonIsDisable] = useState(true);
     const [InputContent, setInputContent] = useState('')
+  const Toast = useToast()
+
     const onClose = () => setIsOpen(false);
     const cancelRef = useRef();
 
@@ -53,7 +56,7 @@ export default () => {
 
             <AlertDialogBody>
               
-                <p className='mb-2'>Write '<span className='text-red-600'>Delete my account</span>' to compolete operation.</p>
+                <p className='mb-2'>Write {"'<span className='text-red-600'>Delete my account</span>'"} to compolete operation.</p>
                 <Input 
                     variant='filled' 
                     placeHolder='Delete my account'
@@ -81,6 +84,13 @@ export default () => {
                   onClick={()=> {
                     // Do the operation
                     setInputContent('')
+                    Toast({
+                      title: "Account removed",
+                      description: "Your account has been removed.",
+                      status: "warning",
+                      duration: 3000,
+                      isClosable: true,
+                    })
                     onClose()
 
                   }} 
