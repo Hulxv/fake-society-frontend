@@ -10,7 +10,7 @@ export default function Friends({data}) {
 			<div className={'w-full flex flex-col space-y-4'} >
 				{
 					data.data.map((friend) => (
-						<Friend {...friend}/>
+						<Friend {...friend} key={friend.id}/>
 					))
 				}
 			</div>
