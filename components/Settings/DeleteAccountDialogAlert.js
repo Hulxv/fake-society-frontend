@@ -51,12 +51,12 @@ export default function DeleteAccountAlertDialog() {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
+              Delete Account
             </AlertDialogHeader>
 
             <AlertDialogBody>
               
-                <p className='mb-2'>Write {"'<span className='text-red-600'>Delete my account</span>'"} to compolete operation.</p>
+                <p className='mb-2'>Write <span className='text-red-600'>{"'Delete my account'"}</span> to compolete operation.</p>
                 <Input 
                     variant='filled' 
                     placeHolder='Delete my account'

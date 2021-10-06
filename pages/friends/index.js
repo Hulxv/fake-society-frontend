@@ -1,7 +1,35 @@
-export default function Friends() {
+import axios from 'axios'
+import Friend from '../../components/Friend'
+
+export default function Friends({data}) {
 	
 	return (
-		<div>Friends</div>
+
+		<div className={'w-full flex flex-col space-y-4 items-center'}>
+			<h1>Friends</h1>
+			<div className={'w-full flex flex-col space-y-4'} >
+				{
+					data.data.map((friend) => (
+						<Friend {...friend}/>
+					))
+				}
+			</div>
+		</div>
 	)
 
+}
+
+
+export async function getStaticProps() {
+	const options = {
+		headers: {
+			"app-id":"615ced57d5200555c182eabb"
+		}
+	}
+	const response = await axios.get("https://dummyapi.io/data/v1/user", options)
+	return{
+		props: {
+			data: response.data
+		}
+	}
 }
