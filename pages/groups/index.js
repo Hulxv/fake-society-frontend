@@ -76,7 +76,7 @@ export default function Groups({groups, posts}) {
 
                         return (
                             <Post 
-                                kety={index}
+                                key={index}
                                 id={post.id}
                                 AvatarImage={'https://via.placeholder.com/600/54176f'} 
                                 Username={post.title.substr(0,15)}
