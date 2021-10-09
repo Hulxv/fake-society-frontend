@@ -6,7 +6,8 @@ import {
 	MenuList,
 	IconButton,
 	Button,
-	Portal
+	Portal,
+	Badge
 } from '@chakra-ui/react'
 
 import {
@@ -20,7 +21,7 @@ import {
 
 
 export default function PostHead(props) {
-	const { Username, AvatarImage, ShareDate } = props
+	const { Username, AvatarImage, ShareDate, group } = props
 	return (
 		<div className={'flex justify-between items-center w-full'}>
 			<div className="flex space-x-2 self-start justify-start items-center ">
@@ -28,7 +29,11 @@ export default function PostHead(props) {
 					<Avatar name={Username} src={AvatarImage} loading={"lazy"}/>
 				</div>
 				<div className="flex flex-col items-start">
-					<span>{Username}</span>
+					<div className={'flex items-center space-x-1'}>
+						<span>{Username}</span>
+						
+						<Badge size={'sm'} colorScheme={'teal'}>{group}</Badge>
+					</div>
 					<span className={'text-black text-opacity-40 text-xs'}>{ShareDate}</span>
 				</div>
 			</div>

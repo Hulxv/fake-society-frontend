@@ -23,7 +23,7 @@ import {
 
 // Components
 import Notifications from "./Notifications";
-import Search from "./Search";
+import Search from "../Search";
 // Data
 import { posts } from "../../data/posts";
 
@@ -40,7 +40,12 @@ export default function Header() {
 					"px-5 shadow sm:px-14 py-2 rounded-xl bg-black_ w-full flex  items-center "
 				}>
 				<div className={"flex items-center justify-between w-full text-white"}>
-					<Search />
+					<Search 
+						Component={
+      						<IconButton icon={<HiSearch size={'1.5em'}/>} variant={'none'} />
+						}
+					/>
+					
 					<div
 						className={"sm:text-xl font-azeret-mono underline cursor-pointer"}
 						onClick={() => Router.push("/")}>

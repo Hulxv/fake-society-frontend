@@ -2,7 +2,7 @@
 
 - [ ] Login
 - [ ] Sign up
-- [ ] Home
+- [x]Home
 - [ ] Profile
 - [ ] Settings
 

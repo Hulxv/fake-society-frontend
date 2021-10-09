@@ -5,8 +5,7 @@ export default function Friends({data}) {
 	
 	return (
 
-		<div className={'w-full flex flex-col space-y-4 items-center'}>
-			<h1>Friends</h1>
+		<div className={'w-full flex flex-col space-y-4 items-center mb-4'}>
 			<div className={'w-full flex flex-col space-y-4'} >
 				{
 					data.data.map((friend) => (
