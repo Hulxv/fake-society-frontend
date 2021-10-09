@@ -28,7 +28,7 @@ export default function Groups({groups, posts}) {
                         />
                         
                     </div>
-                    <div className={'w-full space-x-6 flex overflow-x-auto py-4 pr-4 items-center'}>
+                    <div className={'w-full space-x-6 flex overflow-x-auto py-4 pr-4 items-center ScrollBar'}>
                         <div className={''}>
                             
                             <div className="flex w-20 flex-col px-4 box-content space-y-2 justify-center items-center" >
@@ -63,7 +63,7 @@ export default function Groups({groups, posts}) {
 
             <div className={'w-full flex flex-col space-y-4'} >
                 {
-                    posts.map((post) =>{
+                    posts.map((post, index) =>{
 
                         // For Testing
                         const groups = [
@@ -76,6 +76,7 @@ export default function Groups({groups, posts}) {
 
                         return (
                             <Post 
+                                kety={index}
                                 id={post.id}
                                 AvatarImage={'https://via.placeholder.com/600/54176f'} 
                                 Username={post.title.substr(0,15)}

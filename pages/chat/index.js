@@ -14,6 +14,7 @@ export default function Chats({chats}) {
 			{
 				chats.map((chat,index) => (
 					<Chat 
+						key={index}
 						avatar={chat.avatar}
 						isOnline={chat.isOnline}
 						username={chat.username}

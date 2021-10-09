@@ -46,12 +46,13 @@ function App({ Component, pageProps }) {
 				
 
 			</Head>
-		
+				
 			<ChakraProvider>
 				<PageLayout>
 					<Component {...pageProps} />
 				</PageLayout>
 			</ChakraProvider>
+
 			
 		</>
 	);

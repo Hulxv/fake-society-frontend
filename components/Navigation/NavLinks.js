@@ -61,8 +61,8 @@ export default function PagesIcons( {IsSideBarOpen} ) {
 						<NavLink 	
 							key={index} 
 							href={link.path} 
-							onActiveClassName={`w-10 sm:w-auto sm:h-16 justify-center items-center flex border-b-4 sm:border-b-0 sm:border-l-4 pb-2 sm:pb-0 ${IsSideBarOpen ? "sm:pl-10" : "sm:pl-2"} sm:my-2`}
-							onNotActiveClassName={`sm:border-transparent sm:border-b-0 sm:border-l-4 pb-2 sm:pb-0 ${IsSideBarOpen ? "sm:pl-10" : "sm:pl-2"} `}
+							onActiveClassName={`w-10 sm:w-auto sm:h-16 justify-center items-center flex border-b-4 sm:border-b-0 sm:border-l-4 pb-2 sm:pb-0 ${IsSideBarOpen ? "sm:pl-8" : "sm:pl-2"} sm:my-2`}
+							onNotActiveClassName={`sm:border-transparent sm:border-b-0 sm:border-l-4 pb-2 sm:pb-0 ${IsSideBarOpen ? "sm:pl-8" : "sm:pl-2"} `}
 						>
 								
 								<div className={'flex flex-col sm:flex-row sm:space-x-2 transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center w-full '}>
