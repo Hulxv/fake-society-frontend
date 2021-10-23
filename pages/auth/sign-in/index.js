@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../../Auth";
 
@@ -27,7 +28,9 @@ import * as FingerprintAnimateIcon from "../../../assets/fingerprint-animate-ico
 
 export default function Signin() {
 	const [seePassword, setSeePassword] = useState(false);
+	const Router = useRouter();
 	const { user, signin } = useAuth();
+
 	const {
 		handleSubmit,
 		register,
@@ -35,9 +38,12 @@ export default function Signin() {
 	} = useForm();
 
 	async function SignInHandle(data) {
-		const res = await signin(data);
-
-		console.log("res ==>", res);
+		try {
+			const res = await signin(data);
+			Router.push("/");
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	return (
@@ -48,7 +54,7 @@ export default function Signin() {
 			<form
 				onSubmit={handleSubmit(SignInHandle)}
 				className={
-					"w-100 ring-1 ring-black ring-opacity-10 shadow-lg bg-white flex flex-col items-center py-4 justify-center p-6 py-8 space-y-8 rounded-3xl "
+					"w-100 ring-1 ring-black ring-opacity-10 shadow-lg bg-white flex flex-col items-center py-4 justify-center px-10  space-y-8 rounded-3xl "
 				}>
 				<Box
 					bgColor='teal.400'
@@ -67,79 +73,85 @@ export default function Signin() {
 				</Box>
 
 				<Heading as={"h5"}>Sign in</Heading>
-				<div className={"flex flex-col items-center space-y-4"}>
-					<div>
+				<div style={{ width: "300px" }} className='flex flex-col space-y-4'>
+					<div className={"flex w-full flex-col items-center space-y-4"}>
 						<Providers />
-					</div>
-					<div className={"flex items-start  flex-col space-y-1"}>
-						{errors.email && (
-							<p className='text-red-500 text-xs'>{errors.email?.message}</p>
-						)}
-						<Input
-							isInvalid={errors.email}
-							variant='filled'
-							type='email'
-							placeholder='Email'
-							width={"300px"}
-							{...register("email", {
-								required: "this field is required",
-							})}
-						/>
-					</div>
-					<div className={"flex items-start relative flex-col space-y-1"}>
-						{errors.password?.type === "minLength" ? (
-							<p className='text-red-500 text-xs'>
-								Password length must be greater than or equal 4 character
-							</p>
-						) : errors.password?.type === "required" ? (
-							<p className='text-red-500 text-xs'>{errors.password?.message}</p>
-						) : (
-							<p className='text-red-500 text-xs'>{errors.password?.message}</p>
-						)}
-						<InputGroup width={300} alignSelf='center'>
+
+						<div className={"flex items-start w-full flex-col space-y-1"}>
+							{errors.email && (
+								<p className='text-red-500 text-xs'>{errors.email?.message}</p>
+							)}
 							<Input
-								isInvalid={errors.password}
-								placeholder='Password'
-								type={`${seePassword ? "text" : "password"}`}
-								variant={"filled"}
-								{...register("password", {
+								isInvalid={errors.email}
+								variant='filled'
+								type='email'
+								placeholder='Email'
+								width={"full"}
+								{...register("email", {
 									required: "this field is required",
-									minLength: 4,
 								})}
 							/>
-							<InputRightElement>
-								<IconButton
-									icon={
-										!seePassword ? (
-											<HiEye size={"1.5em"} />
-										) : (
-											<HiEyeOff size={"1.5em"} />
-										)
-									}
-									onClick={() => setSeePassword(!seePassword)}
-									variant='none'
+						</div>
+						<div
+							className={"flex items-start w-full relative flex-col space-y-1"}>
+							{errors.password?.type === "minLength" ? (
+								<p className='text-red-500 text-xs'>
+									Password length must be greater than or equal 4 character
+								</p>
+							) : errors.password?.type === "required" ? (
+								<p className='text-red-500 text-xs'>
+									{errors.password?.message}
+								</p>
+							) : (
+								<p className='text-red-500 text-xs'>
+									{errors.password?.message}
+								</p>
+							)}
+							<InputGroup width={"full"} alignSelf='center'>
+								<Input
+									isInvalid={errors.password}
+									placeholder='Password'
+									type={`${seePassword ? "text" : "password"}`}
+									variant={"filled"}
+									{...register("password", {
+										required: "this field is required",
+										minLength: 4,
+									})}
 								/>
-							</InputRightElement>
-						</InputGroup>
+								<InputRightElement>
+									<IconButton
+										icon={
+											!seePassword ? (
+												<HiEye size={"1.5em"} />
+											) : (
+												<HiEyeOff size={"1.5em"} />
+											)
+										}
+										onClick={() => setSeePassword(!seePassword)}
+										variant='none'
+									/>
+								</InputRightElement>
+							</InputGroup>
+						</div>
 					</div>
-				</div>
-				<div className={"flex justify-end w-80"}>
-					<p
-						className={
-							"text-xs text-left cursor-pointer hover:text-indigo-800"
-						}>
-						Forget password ?
-					</p>
-				</div>
-				<div className={"w-52 flex items-center justify-center"}>
-					<Button
-						type={"submit"}
-						isLoading={isSubmitting}
-						variant='solid'
-						colorScheme='blue'
-						width={"200px"}>
-						Login
-					</Button>
+					<div className={"flex justify-end self-end"}>
+						<p
+							className={
+								"text-xs text-left cursor-pointer hover:text-indigo-800"
+							}>
+							Forget password ?
+						</p>
+					</div>
+					<div className={"w-full flex items-center justify-center"}>
+						<Button
+							type={"submit"}
+							isLoading={isSubmitting}
+							variant='solid'
+							colorScheme='teal'
+							width='full'>
+							Login
+						</Button>
+					</div>
 				</div>
 
 				<Link href={"/auth/sign-up"}>

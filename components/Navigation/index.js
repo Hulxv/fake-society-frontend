@@ -31,7 +31,7 @@ export default function SideBar() {
 			<div
 				className={` bg-black_ rounded-lg w-full sm:h-full ${
 					SideBarIsOpen ? "sm:w-40" : "sm:w-12"
-				} py-4 sm:py-8  flex flex-row sm:flex-col items-center justify-between `}>
+				} pt-2 sm:py-8  flex flex-row sm:flex-col items-center justify-between `}>
 				<div className='flex sm:flex-col justify-center items-center space-x-4 sm:space-x-0 sm:space-y-8 w-full'>
 					{innerWidth >= 640 && (
 						<IconButton

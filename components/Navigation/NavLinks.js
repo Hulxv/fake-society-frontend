@@ -47,15 +47,15 @@ export default function PagesIcons({ IsSideBarOpen }) {
 	return (
 		<div
 			className={
-				"capitalize flex sm:flex-col justify-center items-center w-full"
+				"capitalize flex sm:flex-col justify-center items-start sm:items-center w-full"
 			}>
 			<div
-				className={`flex flex-row sm:flex-col justify-around items-center sm:items-start  sm:space-y-4 w-full `}>
+				className={`flex flex-row sm:flex-col justify-around items-start  sm:space-y-4 w-full `}>
 				{Links.map((link, index) => (
 					<NavLink
 						key={index}
 						href={link.path}
-						onActiveClassName={`w-10 sm:w-auto sm:h-16 justify-center items-center flex border-b-4 sm:border-b-0 sm:border-l-4 pb-2 sm:pb-0 ${
+						onActiveClassName={`w-10 sm:w-auto sm:h-16 justify-center items-center flex border-b-4 sm:border-b-0 sm:border-l-4  pb-2 sm:pb-0 ${
 							IsSideBarOpen ? "sm:pl-8" : "sm:pl-2"
 						} sm:my-2`}
 						onNotActiveClassName={`sm:border-transparent sm:border-b-0 sm:border-l-4 pb-2 sm:pb-0 ${
@@ -63,7 +63,7 @@ export default function PagesIcons({ IsSideBarOpen }) {
 						} `}>
 						<div
 							className={
-								"flex flex-col sm:flex-row sm:space-x-2 transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center w-full "
+								"flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2  transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center w-full "
 							}>
 							{link.icon}
 							{(IsSideBarOpen || innerWidth < 640) && (
@@ -75,15 +75,13 @@ export default function PagesIcons({ IsSideBarOpen }) {
 
 				{innerWidth < 640 && (
 					<Menu colorScheme={"blue"}>
-						<MenuButton>
+						<MenuButton as='div'>
 							<div
 								className={
-									"flex flex-col sm:flex-row sm:space-x-2 justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center"
+									" flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2  transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center w-full "
 								}>
 								<HiOutlineMenu size={"1.7em"} />
-								{(IsSideBarOpen || innerWidth < 640) && (
-									<span className={"text-xs sm:text-base"}>More</span>
-								)}
+								<span className={"text-xs sm:text-base"}>More</span>
 							</div>
 						</MenuButton>
 

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../../Auth";
 
 // Lottie Component (For Animated Icons)
 import Lottie from "react-lottie";
@@ -26,24 +27,26 @@ import Flatpickr from "react-flatpickr";
 import Providers from "../../../components/Providers";
 
 // Icons
-import { HiEyeOff, HiEye } from "react-icons/hi";
+import { HiEyeOff, HiEye, HiOutlineCalendar } from "react-icons/hi";
 
 // Animated Fingerpring icon
 import * as FingerprintAnimateIcon from "../../../assets/fingerprint-animate-icon.json";
 
-export default function Signin() {
+export default function Signup() {
 	const [seePassword, setSeePassword] = useState(false);
 	const [seeConfirmPassword, setSeeConfirmPassword] = useState(false);
+	const { user, signup } = useAuth();
 
 	const {
 		handleSubmit,
 		register,
 		formState: { errors, isSubmitting },
 		reset,
+		setValue,
 	} = useForm();
 
 	function SignUpHandle(data) {
-		console.log(data);
+		signup(data);
 		reset("");
 	}
 	return (
@@ -89,7 +92,7 @@ export default function Signin() {
 							variant='filled'
 							type='text'
 							placeholder='Username'
-							width={"300px"}
+							width={"full"}
 							{...register("username", {
 								required: "this field is required",
 							})}
@@ -103,7 +106,7 @@ export default function Signin() {
 							variant='filled'
 							type='email'
 							placeholder='Email'
-							width={"300px"}
+							width={"full"}
 							{...register("email", {
 								required: "this field is required",
 							})}
@@ -193,8 +196,8 @@ export default function Signin() {
 							{...register("gender", {
 								required: "this field is required",
 							})}>
-							<option value='male'>Male</option>
-							<option value='female'>Female</option>
+							<option value='Male'>Male</option>
+							<option value='Female'>Female</option>
 							<option value={null}>I prefer not to say</option>
 						</Select>
 					</div>
@@ -202,7 +205,7 @@ export default function Signin() {
 						{errors.gender && (
 							<p className='text-red-500 text-xs'>{errors.birthday?.message}</p>
 						)}
-						<BirthdayInput register={register} />
+						<BirthdayInput register={register} setValue={setValue} />
 					</div>
 				</div>
 
@@ -228,26 +231,30 @@ export default function Signin() {
 	);
 }
 
-function BirthdayInput({ register }) {
+function BirthdayInput({ register, setValue }) {
 	const [selectedBirthday, setSelectedBirthday] = useState("");
+	const ref = useRef("");
 
 	return (
-		<div className={"relative  flex items-center"}>
+		<div className={"relative w-full  flex items-center"}>
 			<Input
 				variant='filled'
-				value={selectedBirthday}
+				width='full'
 				placeholder='Birthday'
 				{...register("birthday", {
 					required: "This field is required",
 				})}
 			/>
-
+			<div className='absolute right-2'>
+				<HiOutlineCalendar size='1.3em' />
+			</div>{" "}
 			<Flatpickr
 				value={selectedBirthday}
 				onChange={([date]) => {
-					setSelectedBirthday(date.toLocaleDateString());
+					setValue("birthday", date.toLocaleDateString());
 				}}
-				render={({ value, ...props }, ref) => {
+				ref={ref}
+				render={({ ...props }, ref) => {
 					return (
 						<input
 							ref={ref}

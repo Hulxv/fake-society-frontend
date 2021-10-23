@@ -1,47 +1,61 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState, useEffect, useContext, createContext } from "react";
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
+	const Router = useRouter();
 	const [user, setUser] = useState(
-		(typeof window !== "undefined" && window.localStorage.getItem("user")) ||
-			null,
+		JSON.parse(
+			typeof sessionStorage !== "undefined" && sessionStorage.getItem("user"),
+		)?.data?.user || null,
+	);
+	const [token, setToken] = useState(
+		JSON.parse(
+			typeof sessionStorage !== "undefined" && sessionStorage.getItem("user"),
+		)?.data?.token || null,
 	);
 	async function signin(Data) {
 		console.log(Data, typeof Data);
 		try {
-			const req = await axios({
-				url: `${process.env.NEXT_PUBLIC_API_URL}login/`,
-				email: Data.email,
-				password: Data.password,
-				headers: {
-					"Access-Control-Allow-Origin": "*",
+			const req = await axios.post(
+				`${process.env.NEXT_PUBLIC_API_URL}login/`,
+				Data,
+			);
 
-					"Content-Type":
-						"application/x-www-form-urlencoded; charset=UTF-8;application/json",
-				},
-				method: "post",
-			});
+			sessionStorage.setItem("user", JSON.stringify(req));
+			setUser(req.data.user);
+			setToken(req.data.token);
+		} catch (error) {
+			console.err(error);
+		}
+	}
+	async function signup(Data) {
+		try {
+			const req = await axios.post(
+				`${process.env.NEXT_PUBLIC_API_URL}register/`,
+				Data,
+			);
 
 			console.log("req ==>", req);
 		} catch (error) {
-			console.log("error ==>", error);
+			console.err(error);
 		}
-		// try {
-		// 	const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}login/`, {
-		// 		body: { email: Data.email, password: Data.password },
-		// 		method: "post",
-
-		// 	});
-
-		// 	console.log("req ==>", req);
-		// } catch (error) {
-		// 	console.log("error ==>", error);
-		// }
 	}
+
+	function signout() {
+		sessionStorage.removeItem("user"); // Remove user from session storage
+		setToken(null); // Remove token
+		setUser(null); // Remove user
+		Router.push("/auth/sign-in");
+	}
+
 	const value = {
 		signin,
+		signup,
+		signout,
 		user,
+		token,
 	};
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

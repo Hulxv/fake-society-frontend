@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+import { useAuth } from "../../Auth";
+
 import {
 	Button,
 	IconButton,
@@ -11,25 +13,20 @@ import {
 } from "@chakra-ui/react";
 
 // Icons
-import { GrNotification, GrAdd, GrSearch } from "react-icons/gr";
 
-import {
-	HiOutlineMenu,
-	HiSearch,
-	HiOutlineBell,
-	HiUser,
-	HiLogout,
-} from "react-icons/hi";
+import { HiSearch, HiUser, HiLogout } from "react-icons/hi";
 
 // Components
 import Notifications from "./Notifications";
 import Search from "../Search";
-// Data
+// Fake Data for testing
 import { posts } from "../../data/posts";
 
 export default function Header() {
 	const Router = useRouter();
-
+	const { user, token, signout } = useAuth();
+	console.log(user);
+	console.log(token);
 	return (
 		<div
 			className={
@@ -40,12 +37,12 @@ export default function Header() {
 					"px-5 shadow sm:px-14 py-2 rounded-xl bg-black_ w-full flex  items-center "
 				}>
 				<div className={"flex items-center justify-between w-full text-white"}>
-					<Search 
+					<Search
 						Component={
-      						<IconButton icon={<HiSearch size={'1.5em'}/>} variant={'none'} />
+							<IconButton icon={<HiSearch size={"1.5em"} />} variant={"none"} />
 						}
 					/>
-					
+
 					<div
 						className={"sm:text-xl font-azeret-mono underline cursor-pointer"}
 						onClick={() => Router.push("/")}>
@@ -57,13 +54,7 @@ export default function Header() {
 						<div className={"text-black"}>
 							<Menu>
 								<MenuButton>
-									<Avatar
-										name='Oshigaki Kisame'
-										src={
-											typeof window !== "undefined" &&
-											window.localStorage.getItem("fake-society-avatar")
-										}
-									/>
+									<Avatar name={user?.name} src={user?.avatar} />
 								</MenuButton>
 								<MenuList>
 									<MenuItem height={50}>
@@ -89,7 +80,9 @@ export default function Header() {
 									)}
 									<MenuDivider />
 									<MenuItem height={50}>
-										<div className='flex space-x-2 items-center'>
+										<div
+											className='flex space-x-2 items-center'
+											onClick={() => signout()}>
 											<HiLogout size={"1.5em"} />
 											<span>Sign Out</span>
 										</div>
