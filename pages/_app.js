@@ -51,7 +51,6 @@ function App({ Component, pageProps }) {
 				/>
 				<link rel='preconnect' href='https://fonts.gstatic.com' />
 			</Head>
-
 			<ChakraProvider>
 				<AuthProvider>
 					<PageLayout isLoading={isLoading}>

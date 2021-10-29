@@ -1,10 +1,9 @@
 * {
-  outline: none;
+	outline: none;
 }
+
 .post-content a {
-  text-decoration: underline;
-  color: #2a55c2;
-  /*color: red;*/
-
+	text-decoration: underline;
+	color: #2a55c2;
+	/*color: red;*/
 }
-

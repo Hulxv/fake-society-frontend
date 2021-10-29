@@ -8,7 +8,7 @@ export default function FriendsList() {
 	return (
 		<div
 			className={
-				"flex md:flex-col self-center w-full overflow-x-auto md:h-100 items-center md:overflow-y-auto  "
+				"flex md:flex-col self-center w-full overflow-x-auto md:h-108 items-center md:overflow-y-auto  "
 			}>
 			{friends.map((friend, index) => (
 				<div className={"items-center space-y-1 p-2 flex flex-col"} key={index}>

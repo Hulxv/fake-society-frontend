@@ -24,7 +24,7 @@ import {
 import Providers from "../../../components/Providers";
 // Icons
 import { HiLockClosed, HiEyeOff, HiEye } from "react-icons/hi";
-import * as FingerprintAnimateIcon from "../../../assets/fingerprint-animate-icon.json";
+import * as FingerprintAnimateIcon from "../../../assets/animated-icons/fingerprint-animate-icon.json";
 
 export default function Signin() {
 	const [seePassword, setSeePassword] = useState(false);
@@ -94,28 +94,23 @@ export default function Signin() {
 						</div>
 						<div
 							className={"flex items-start w-full relative flex-col space-y-1"}>
-							{errors.password?.type === "minLength" ? (
-								<p className='text-red-500 text-xs'>
-									Password length must be greater than or equal 4 character
-								</p>
-							) : errors.password?.type === "required" ? (
-								<p className='text-red-500 text-xs'>
-									{errors.password?.message}
-								</p>
-							) : (
+							{errors.password && (
 								<p className='text-red-500 text-xs'>
 									{errors.password?.message}
 								</p>
 							)}
-							<InputGroup width={"full"} alignSelf='center'>
+							<InputGroup width={300}>
 								<Input
-									isInvalid={errors.password}
 									placeholder='Password'
 									type={`${seePassword ? "text" : "password"}`}
 									variant={"filled"}
 									{...register("password", {
 										required: "this field is required",
-										minLength: 4,
+										minLength: {
+											value: 4,
+											message:
+												"Password length must be greater than or equal 4 character",
+										},
 									})}
 								/>
 								<InputRightElement>

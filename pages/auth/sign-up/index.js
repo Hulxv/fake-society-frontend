@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { format } from "date-fns";
+
 import { useAuth } from "../../../Auth";
 
 // Lottie Component (For Animated Icons)
@@ -30,12 +32,12 @@ import Providers from "../../../components/Providers";
 import { HiEyeOff, HiEye, HiOutlineCalendar } from "react-icons/hi";
 
 // Animated Fingerpring icon
-import * as FingerprintAnimateIcon from "../../../assets/fingerprint-animate-icon.json";
+import * as FingerprintAnimateIcon from "../../../assets/animated-icons/fingerprint-animate-icon.json";
+import router from "next/router";
 
 export default function Signup() {
 	const [seePassword, setSeePassword] = useState(false);
-	const [seeConfirmPassword, setSeeConfirmPassword] = useState(false);
-	const { user, signup } = useAuth();
+	const { signup } = useAuth();
 
 	const {
 		handleSubmit,
@@ -43,11 +45,15 @@ export default function Signup() {
 		formState: { errors, isSubmitting },
 		reset,
 		setValue,
+		setFocus,
 	} = useForm();
 
 	function SignUpHandle(data) {
-		signup(data);
-		reset("");
+		try {
+			signup(data);
+			router.replace("/auth/sign-in");
+			reset("");
+		} catch (err) {}
 	}
 	return (
 		<div
@@ -113,13 +119,7 @@ export default function Signup() {
 						/>
 					</div>
 					<div className={"flex flex-col items-center relative "}>
-						{errors.password?.type === "minLength" ? (
-							<p className='text-red-500 text-xs'>
-								Password length must be greater than or equal 4 character
-							</p>
-						) : errors.password?.type === "required" ? (
-							<p className='text-red-500 text-xs'>{errors.password?.message}</p>
-						) : (
+						{errors.password && (
 							<p className='text-red-500 text-xs'>{errors.password?.message}</p>
 						)}
 						<InputGroup width={300}>
@@ -129,7 +129,11 @@ export default function Signup() {
 								variant={"filled"}
 								{...register("password", {
 									required: "this field is required",
-									minLength: 4,
+									minLength: {
+										value: 4,
+										message:
+											"Password length must be greater than or equal 4 character",
+									},
 								})}
 							/>
 							<InputRightElement>
@@ -147,45 +151,7 @@ export default function Signup() {
 							</InputRightElement>
 						</InputGroup>
 					</div>
-					<div className={"flex items-start relative flex-col items-center"}>
-						{errors["confirm-password"]?.type === "minLength" ? (
-							<p className='text-red-500 text-xs'>
-								Password length must be greater than or equal 4 character
-							</p>
-						) : errors["confirm-password"]?.type === "required" ? (
-							<p className='text-red-500 text-xs'>
-								{errors["confirm-password"]?.message}
-							</p>
-						) : (
-							<p className='text-red-500 text-xs'>
-								{errors["confirm-password"]?.message}
-							</p>
-						)}
-						<InputGroup width={300}>
-							<Input
-								placeholder='Confrim Password'
-								type={`${seeConfirmPassword ? "text" : "password"}`}
-								variant={"filled"}
-								{...register("confirm-password", {
-									required: "this field is required",
-									minLength: 4,
-								})}
-							/>
-							<InputRightElement>
-								<IconButton
-									icon={
-										!seeConfirmPassword ? (
-											<HiEye size={"1.5em"} />
-										) : (
-											<HiEyeOff size={"1.5em"} />
-										)
-									}
-									onClick={() => setSeeConfirmPassword(!seeConfirmPassword)}
-									variant='none'
-								/>
-							</InputRightElement>
-						</InputGroup>
-					</div>
+
 					<div className='flex flex-col items-center'>
 						{errors.gender && (
 							<p className='text-red-500 text-xs'>{errors.gender?.message}</p>
@@ -196,8 +162,8 @@ export default function Signup() {
 							{...register("gender", {
 								required: "this field is required",
 							})}>
-							<option value='Male'>Male</option>
-							<option value='Female'>Female</option>
+							<option value={1}>Male</option>
+							<option value={2}>Female</option>
 							<option value={null}>I prefer not to say</option>
 						</Select>
 					</div>
@@ -251,7 +217,8 @@ function BirthdayInput({ register, setValue }) {
 			<Flatpickr
 				value={selectedBirthday}
 				onChange={([date]) => {
-					setValue("birthday", date.toLocaleDateString());
+					setValue("birthday", format(new Date(date), "yyyy-MM-dd"));
+					console.log("birthday ==>", format(new Date(date), "yyyy-MM-dd"));
 				}}
 				ref={ref}
 				render={({ ...props }, ref) => {
