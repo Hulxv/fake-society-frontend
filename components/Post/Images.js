@@ -11,7 +11,8 @@ import {
 	useDisclosure, 
 	Button,
 	Avatar,
-	Divider
+	Divider,
+	Img
   	
 } from '@chakra-ui/react'
 
@@ -29,7 +30,7 @@ import {
 				ImagesList.map((img, index) => index <= 2 && (
 
 					<Zoom key={index}>
-						<img src={img} alt="" className={'p-1 rounded-lg h-36 sm:h-60  overflow-hidden'}/>
+						<Img src={img} alt="" className={'p-1 rounded-lg h-36 sm:h-60  overflow-hidden'}/>
 					</Zoom>
 
 				))
