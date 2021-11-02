@@ -4,6 +4,7 @@ import { useWindowSize } from "rooks";
 // Components
 import NavLink from "../NavLink";
 import Settings from "../Settings";
+import AddNewPost from "../AddNewPost";
 
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import {
@@ -88,6 +89,9 @@ export default function PagesIcons({ IsSideBarOpen }) {
 						<MenuList>
 							<MenuItem>
 								<Settings color={"black"} />
+							</MenuItem>
+							<MenuItem>
+								<AddNewPost color={"black"} />
 							</MenuItem>
 						</MenuList>
 					</Menu>

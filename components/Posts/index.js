@@ -1,9 +1,12 @@
 import { Button } from "@chakra-ui/react";
-import { useAuth } from "../../Auth";
-import { HiRefresh } from "react-icons/hi";
+import { HiUserAdd } from "react-icons/hi";
+import Search from "../Search";
 
 import Post from "../Post";
-import router from "next/router";
+
+// Lottie Component (For Animated Icons)
+import Lottie from "react-lottie";
+import * as Friends from "../../assets/animated-icons/demand-outline.json";
 
 export default function Posts({ posts }) {
 	return (
@@ -40,15 +43,24 @@ export default function Posts({ posts }) {
 			) : (
 				<div
 					className={
-						"capitalize   h-100  flex items-center flex-col justify-center space-y-3"
+						"capitalize    flex items-center flex-col justify-center space-y-3"
 					}>
+					<Lottie
+						options={{
+							animationData: Friends,
+						}}
+						height={250}
+						width={250}
+					/>
 					<div>No posts is found</div>
-					<Button
-						colorScheme='blue'
-						leftIcon={<HiRefresh />}
-						onClick={() => router.replace(router.asPath)}>
-						Refresh
-					</Button>
+					<Search
+						taps='users'
+						Component={
+							<Button colorScheme='blue' leftIcon={<HiUserAdd size='1.4em' />}>
+								Add Some Friends
+							</Button>
+						}
+					/>
 				</div>
 			)}
 		</div>

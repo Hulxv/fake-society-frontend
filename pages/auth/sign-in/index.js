@@ -12,10 +12,8 @@ import {
 	InputGroup,
 	Input,
 	InputRightElement,
-	FormLabel,
 	Button,
 	Heading,
-	Select,
 	IconButton,
 	Box,
 } from "@chakra-ui/react";

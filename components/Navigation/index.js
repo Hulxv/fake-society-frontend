@@ -3,7 +3,6 @@ import { useWindowSize } from "rooks";
 
 import NavLinks from "./NavLinks";
 import Settings from "../Settings";
-
 // Icons
 import {
 	HiArrowRight,
