@@ -4,10 +4,6 @@ import { GetNewToken } from "../../Auth";
 
 import Zoom from "react-medium-image-zoom";
 import { Avatar, Img, Button } from "@chakra-ui/react";
-import Posts from "../../components/Posts";
-import { HiUserAdd } from "react-icons/hi";
-import Search from "../../components/Search";
-
 import Post from "../../components/Post";
 
 // Lottie Component (For Animated Icons)
@@ -19,9 +15,9 @@ export default function Profile({ data, error, posts }) {
 	if (error)
 		return (
 			<Error
-				errMessage={error.detail}
-				errCode={error.code}
-				statusCode={error.statusCode}
+				errMessage={error?.detail}
+				errCode={error?.code}
+				statusCode={error?.statusCode}
 			/>
 		);
 
@@ -82,7 +78,7 @@ export default function Profile({ data, error, posts }) {
 				) : (
 					<div
 						className={
-							"capitalize    flex items-center flex-col justify-center space-y-3"
+							"capitalize flex items-center flex-col justify-center space-y-3"
 						}>
 						<Lottie
 							options={{
@@ -115,10 +111,11 @@ export async function getServerSideProps({ req, res, query }) {
 		);
 		const data = allProfiles.data.find((e) => e.id == query.id);
 
-		if (!data)
+		if (!data) {
 			return {
 				notFound: true,
 			};
+		}
 
 		return {
 			props: {
@@ -126,10 +123,13 @@ export async function getServerSideProps({ req, res, query }) {
 			},
 		};
 	} catch (err) {
-		console.log("err");
+		console.log("err", err?.response);
 		return {
 			props: {
-				error: { ...err.response.data, statusCode: err.response.status },
+				error: {
+					...err?.response?.data,
+					statusCode: err?.response?.status ?? 500,
+				},
 			},
 		};
 	}

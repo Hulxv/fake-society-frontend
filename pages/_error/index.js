@@ -1,15 +1,14 @@
 import { Button, Heading } from "@chakra-ui/react";
 
-import router, { useRouter } from "next/router";
+import router from "next/router";
 import Head from "next/head";
 
 // Lottie Component (For Animated Icons)
 import Lottie from "react-lottie";
 import * as ServerIcon from "../../assets/animated-icons/server.json";
+import * as Roadblock from "../../assets/animated-icons/roadblock.json";
 
 export default function Error({ statusCode, errMessage, errCode }) {
-	const Router = useRouter();
-
 	return (
 		<>
 			<Head>
@@ -22,7 +21,7 @@ export default function Error({ statusCode, errMessage, errCode }) {
 				}>
 				<Lottie
 					options={{
-						animationData: ServerIcon,
+						animationData: statusCode === 401 ? Roadblock : ServerIcon,
 					}}
 					height={250}
 					width={250}
@@ -30,9 +29,13 @@ export default function Error({ statusCode, errMessage, errCode }) {
 				<Heading size='4xl' w='auto'>
 					{statusCode}
 				</Heading>
-				<div className='opacity-70'>{errMessage ?? "Some Error Happend"}</div>
+				<div className='flex flex-col items-center'>
+					<div className='opacity-70 capitalize'>
+						{errMessage ?? "Something went wrong or page not found"}
+					</div>
 
-				<div className='opacity- underline text-red-800'>{errCode}</div>
+					<div className='opacity- underline text-red-800'>{errCode}</div>
+				</div>
 
 				<Button colorScheme='blue' onClick={() => router.push("/")}>
 					Back Home
