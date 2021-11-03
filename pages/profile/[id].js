@@ -11,7 +11,6 @@ import Lottie from "react-lottie";
 import * as Globe from "../../assets/animated-icons/globe.json";
 
 export default function Profile({ data, error, posts }) {
-	console.log(data);
 	if (error)
 		return (
 			<Error
