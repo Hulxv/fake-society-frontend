@@ -7,7 +7,6 @@ import { useState, useContext, createContext, useEffect } from "react";
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-	console.log(cookie.get("user"));
 	const [user, setUser] = useState(
 		(typeof cookie.get("user") !== "undefined" &&
 			JSON.parse(cookie.get("user"))) ||
@@ -26,21 +25,30 @@ export default function AuthProvider({ children }) {
 				`${process.env.NEXT_PUBLIC_API_URL}/login/`,
 				Data,
 			);
-
-			cookie.set("user", JSON.stringify(req.data.user), { expires: 365 });
-			cookie.set("token", JSON.stringify(req.data.token), { expires: 365 });
-			setUser(req.data.user);
-			setToken(req.data.token);
-		} catch (error) {
-			console.err(error);
+			console.log(req.data.token.access);
+			cookie.set("user", JSON.stringify(req?.data?.user), { expires: 365 });
+			cookie.set("token", JSON.stringify(req?.data?.token), { expires: 365 });
+			setUser(req?.data?.user);
+			setToken(req?.data?.token);
+		} catch (err) {
+			// console.error(err.response);
+			throw err;
 		}
 	}
 
 	async function signup(Data) {
 		try {
-			await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/register/`, Data);
-		} catch (error) {
-			console.err(error);
+			const req = await axios.post(
+				`${process.env.NEXT_PUBLIC_API_URL}/register/`,
+				Data,
+			);
+
+			cookie.set("user", JSON.stringify(req?.data?.user), { expires: 30 });
+			cookie.set("token", JSON.stringify(req?.data?.token), { expires: 30 });
+			setUser(req?.data?.user);
+			setToken(req?.data?.token);
+		} catch (err) {
+			throw err;
 		}
 	}
 
@@ -75,13 +83,13 @@ export async function GetNewToken(refreshToken, oldTokens, responseFromServer) {
 
 	const newTokens = JSON.stringify({
 		...oldTokens,
-		access: NewToken.data.access,
+		access: NewToken.data?.access,
 	});
 
 	responseFromServer.setHeader(
 		"Set-Cookie",
 		serialize("token", newTokens, {
-			maxAge: Math.pow(60, 4), // 12.960.000 Sec / 150 Day
+			maxAge: 3600 * 24 * 30, // 12.960.000 Sec / 150 Day
 			path: "/",
 			secure: process.env.NODE_ENV === "production",
 		}),

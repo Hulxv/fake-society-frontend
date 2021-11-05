@@ -16,6 +16,7 @@ import {
 	Heading,
 	IconButton,
 	Box,
+	useToast,
 } from "@chakra-ui/react";
 
 // Components
@@ -26,8 +27,10 @@ import * as FingerprintAnimateIcon from "../../../assets/animated-icons/fingerpr
 
 export default function Signin() {
 	const [seePassword, setSeePassword] = useState(false);
+
+	const toast = useToast();
 	const Router = useRouter();
-	const { user, signin } = useAuth();
+	const { signin } = useAuth();
 
 	const {
 		handleSubmit,
@@ -39,8 +42,25 @@ export default function Signin() {
 		try {
 			const res = await signin(data);
 			Router.push("/");
+			toast({
+				title: `Success`,
+				description: `Sign in done successfully, Let's share something !`,
+				status: "success",
+				position: "top",
+				duration: 9000,
+				isClosable: true,
+			});
 		} catch (err) {
-			console.log(err);
+			const { data, status, statusText } = err?.response;
+
+			toast({
+				title: `[${status}] ${statusText}`,
+				description: data.detail,
+				status: "error",
+				position: "top",
+				duration: 9000,
+				isClosable: true,
+			});
 		}
 	}
 

@@ -19,6 +19,7 @@ import {
 	Select,
 	IconButton,
 	Box,
+	useToast,
 } from "@chakra-ui/react";
 
 // Flatpickr (Used in birthday input)
@@ -37,6 +38,7 @@ import router from "next/router";
 
 export default function Signup() {
 	const [seePassword, setSeePassword] = useState(false);
+	const toast = useToast();
 	const { signup } = useAuth();
 
 	const {
@@ -48,12 +50,34 @@ export default function Signup() {
 		setFocus,
 	} = useForm();
 
-	function SignUpHandle(data) {
+	async function SignUpHandle(data) {
 		try {
-			signup(data);
-			router.replace("/auth/sign-in");
+			const res = await signup(data);
+
+			router.push("/");
+
+			toast({
+				title: `Success`,
+				description: `Account has been created, Welcome to Fake Society !.`,
+				status: "success",
+				position: "top",
+				duration: 9000,
+				isClosable: true,
+			});
 			reset("");
-		} catch (err) {}
+		} catch (err) {
+			console.log(err.response);
+			const { data, status, statusText } = err?.response;
+
+			toast({
+				title: `[${status}] ${statusText}`,
+				description: data.detail,
+				status: "error",
+				position: "top",
+				duration: 9000,
+				isClosable: true,
+			});
+		}
 	}
 	return (
 		<div
@@ -198,9 +222,6 @@ export default function Signup() {
 }
 
 function BirthdayInput({ register, setValue }) {
-	const [selectedBirthday, setSelectedBirthday] = useState("");
-	const ref = useRef("");
-
 	return (
 		<div className={"relative w-full  flex items-center"}>
 			<Input
@@ -215,12 +236,11 @@ function BirthdayInput({ register, setValue }) {
 				<HiOutlineCalendar size='1.3em' />
 			</div>{" "}
 			<Flatpickr
-				value={selectedBirthday}
 				onChange={([date]) => {
 					setValue("birthday", format(new Date(date), "yyyy-MM-dd"));
-					console.log("birthday ==>", format(new Date(date), "yyyy-MM-dd"));
+
+					console.log(format(new Date(date), "yyyy-MM-dd"));
 				}}
-				ref={ref}
 				render={({ ...props }, ref) => {
 					return (
 						<input
