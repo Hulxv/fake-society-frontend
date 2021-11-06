@@ -15,7 +15,6 @@ import {
 	ModalBody,
 	ModalCloseButton,
 	useDisclosure,
-	IconButton,
 	Button,
 	Tabs,
 	Tab,

@@ -1,17 +1,18 @@
-import App from "./_app";
-
 // Components
 import { Button } from "@chakra-ui/react";
-import { HiUserAdd } from "react-icons/hi";
+import Post from "../components/Post";
 import Search from "../components/Search";
 
-import Post from "../components/Post";
+import { HiUserAdd } from "react-icons/hi";
 
 // Lottie Component (For Animated Icons)
 import Lottie from "react-lottie";
 import * as Friends from "../assets/animated-icons/demand-outline.json";
+import { GetNewToken } from "../Auth";
+import axios from "axios";
 
-export default function Home({ posts }) {
+export default function Home({ posts, error }) {
+	console.log(posts);
 	return (
 		<div className={"w-full "}>
 			<div
@@ -24,10 +25,10 @@ export default function Home({ posts }) {
 						{posts?.map((post, index) => (
 							<Post
 								key={index}
-								Username={post.username}
-								AvatarImage={post.avatar}
+								Username={post.author.name}
+								AvatarImage={`${process.env.NEXT_PUBLIC_API_URL}${post.author.avatar}`}
 								Content={post.content}
-								ShareDate={post.date}
+								ShareDate={post.DatePublished}
 								ImagesList={post.images || null}
 							/>
 						))}
@@ -75,9 +76,37 @@ export default function Home({ posts }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-	return {
-		props: {
-			posts: [],
-		},
-	};
+	try {
+		const tokens = JSON.parse(req.cookies.token);
+		await GetNewToken(tokens.refresh, tokens, res); // Set New Token
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${tokens.access}`,
+			},
+		};
+		const data = await axios.get(
+			`${process.env.NEXT_PUBLIC_API_URL}/api/posts`,
+			config,
+		);
+
+		// test request
+		console.log("data", data);
+
+		return {
+			props: {
+				posts: data.data || [],
+			},
+		};
+	} catch (err) {
+		console.log("err", err?.response);
+		return {
+			props: {
+				error: {
+					...err?.response?.data,
+					statusCode: err?.response?.status ?? 500,
+				},
+			},
+		};
+	}
 }

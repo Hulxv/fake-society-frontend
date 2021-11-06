@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useWindowSize } from "rooks";
 
 // Components
@@ -8,13 +7,10 @@ import AddNewPost from "../AddNewPost";
 
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import {
-	HiArrowRight,
-	HiArrowLeft,
-	HiMenuAlt2,
 	HiUserGroup,
 	HiUsers,
 	HiHome,
-	HiAdjustments,
+	HiPlus,
 	HiAnnotation,
 	HiOutlineMenu,
 } from "react-icons/hi";
@@ -88,10 +84,26 @@ export default function PagesIcons({ IsSideBarOpen }) {
 
 						<MenuList>
 							<MenuItem>
-								<Settings color={"black"} />
+								<AddNewPost
+									component={
+										<div className='flex flex-row sm:flex-col w-full items-center capitalize'>
+											<div
+												className={`flex flex-row space-x-2 justify-center transition duration-200 cursor-pointer 
+													text-black
+												text-opacity-80 hover:text-opacity-100 items-center`}>
+												<HiPlus size={"2em"} />
+												{(IsSideBarOpen || innerWidth < 640) && (
+													<span className={"text-xs sm:text-base"}>
+														New Post
+													</span>
+												)}
+											</div>
+										</div>
+									}
+								/>
 							</MenuItem>
 							<MenuItem>
-								<AddNewPost color={"black"} />
+								<Settings color={"black"} />
 							</MenuItem>
 						</MenuList>
 					</Menu>

@@ -3,18 +3,10 @@ import { useWindowSize } from "rooks";
 
 import NavLinks from "./NavLinks";
 import Settings from "../Settings";
+import AddNewPost from "../AddNewPost";
+
 // Icons
-import {
-	HiArrowRight,
-	HiArrowLeft,
-	HiMenuAlt2,
-	HiUserGroup,
-	HiUsers,
-	HiHome,
-	HiAdjustments,
-	HiAnnotation,
-	HiOutlineMenu,
-} from "react-icons/hi";
+import { HiArrowRight, HiArrowLeft, HiPlus } from "react-icons/hi";
 
 import { IconButton } from "@chakra-ui/react";
 
@@ -49,7 +41,24 @@ export default function SideBar() {
 
 					<NavLinks IsSideBarOpen={SideBarIsOpen} />
 				</div>
-				{innerWidth >= 640 && <Settings IsSideBarOpen={SideBarIsOpen} />}
+				{innerWidth >= 640 && (
+					<div className='flex flex-col w-full items-start space-y-3'>
+						<AddNewPost
+							component={
+								<div className='flex flex-row sm:flex-col w-full items-center capitalize'>
+									<div
+										className={`flex flex-row  justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center`}>
+										<HiPlus size={"2em"} />
+										{(SideBarIsOpen || innerWidth < 640) && (
+											<span className={"text-xs sm:text-base"}>New Post</span>
+										)}
+									</div>
+								</div>
+							}
+						/>
+						<Settings IsSideBarOpen={SideBarIsOpen} />
+					</div>
+				)}
 			</div>
 		</div>
 	);

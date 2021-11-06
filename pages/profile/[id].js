@@ -10,7 +10,8 @@ import Post from "../../components/Post";
 import Lottie from "react-lottie";
 import * as Globe from "../../assets/animated-icons/globe.json";
 
-export default function Profile({ data, error, posts }) {
+export default function Profile({ profile, error, posts }) {
+	// console.log(posts);
 	if (error)
 		return (
 			<Error
@@ -26,7 +27,7 @@ export default function Profile({ data, error, posts }) {
 				<div className='w-full'>
 					<Zoom wrapStyle={{ width: "100%" }}>
 						<Img
-							src={`${process.env.NEXT_PUBLIC_API_URL}${data.cover}`}
+							src={`${process.env.NEXT_PUBLIC_API_URL}${profile.cover}`}
 							alt=''
 							className={" rounded-xl w-full   "}
 						/>
@@ -35,12 +36,12 @@ export default function Profile({ data, error, posts }) {
 				<div className='flex items-center space-x-3 self-start m-1'>
 					<Avatar
 						size='md'
-						src={`${process.env.NEXT_PUBLIC_API_URL}${data.avatar}`}
+						src={`${process.env.NEXT_PUBLIC_API_URL}${profile.avatar}`}
 						alt=''
 					/>
-					<div className='text-xl'>{data.name}</div>
+					<div className='text-xl'>{profile.name}</div>
 				</div>
-				<div>{data.bio}</div>
+				<div>{profile.bio}</div>
 			</div>
 
 			{/* User Posts */}
@@ -51,13 +52,14 @@ export default function Profile({ data, error, posts }) {
 				{posts?.length > 0 && typeof posts !== "undefined" ? (
 					<>
 						{" "}
-						{posts?.map((post, index) => (
+						{posts?.map((post) => (
 							<Post
-								key={index}
-								Username={post.username}
-								AvatarImage={post.avatar}
+								key={post.id}
+								UserID={[post.author.id]}
+								Username={post.author.name}
+								AvatarImage={`${process.env.NEXT_PUBLIC_API_URL}${post.author.avatar}`}
 								Content={post.content}
-								ShareDate={post.date}
+								ShareDate={post.DatePublished}
 								ImagesList={post.images || null}
 							/>
 						))}
@@ -104,13 +106,14 @@ export async function getServerSideProps({ req, res, query }) {
 				Authorization: `Bearer ${tokens.access}`,
 			},
 		};
-		const allProfiles = await axios.get(
-			`${process.env.NEXT_PUBLIC_API_URL}/profile/`,
+		const data = await axios.get(
+			`${process.env.NEXT_PUBLIC_API_URL}/profile/${query.id}`,
 			config,
 		);
-		const data = allProfiles.data.find((e) => e.id == query.id);
 
-		if (!data) {
+		// test request
+		// console.log("data", data);
+		if (!data.data) {
 			return {
 				notFound: true,
 			};
@@ -118,7 +121,8 @@ export async function getServerSideProps({ req, res, query }) {
 
 		return {
 			props: {
-				data: data,
+				profile: data.data.profile,
+				posts: data.data.posts,
 			},
 		};
 	} catch (err) {

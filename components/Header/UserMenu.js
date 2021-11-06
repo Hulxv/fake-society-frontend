@@ -35,7 +35,10 @@ function UserMenu() {
 					/>
 				</MenuButton>
 				<MenuList>
-					<MenuItem height={50} className='flex space-x-2 items-center '>
+					<MenuItem
+						height={50}
+						className='flex space-x-2 items-center '
+						onClick={() => router.push(`/profile/${user.id}`)}>
 						<HiUser size={"1.5em"} />
 						<span>Profile</span>
 					</MenuItem>

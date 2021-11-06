@@ -83,15 +83,20 @@ export async function GetNewToken(refreshToken, oldTokens, responseFromServer) {
 
 	const newTokens = JSON.stringify({
 		...oldTokens,
-		access: NewToken.data?.access,
+		access: NewToken?.data?.access,
 	});
+	if (responseFromServer) {
+		responseFromServer.setHeader(
+			"Set-Cookie",
+			serialize("token", newTokens, {
+				maxAge: 3600 * 24 * 30, // 12.960.000 Sec / 150 Day
+				path: "/",
+				secure: process.env.NODE_ENV === "production",
+			}),
+		);
+	} else {
+		cookie.set("token", newTokens, { expires: 30 });
+	}
 
-	responseFromServer.setHeader(
-		"Set-Cookie",
-		serialize("token", newTokens, {
-			maxAge: 3600 * 24 * 30, // 12.960.000 Sec / 150 Day
-			path: "/",
-			secure: process.env.NODE_ENV === "production",
-		}),
-	);
+	return newTokens;
 }
