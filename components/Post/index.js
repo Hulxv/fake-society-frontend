@@ -4,17 +4,17 @@ import { Divider } from "@chakra-ui/react";
 
 // Components
 import Images from "./Images";
-import Reactions from "./Reactions";
+import Footer from "./Footer";
 import Head from "./Head";
 
 export default function Post({
-	AvatarImage,
-	Username,
-	Content,
-	ShareDate,
-	ImagesList = [],
+	author,
+	content,
+	publishedDate,
+	images = [],
 	group,
-	UserID,
+	counters = {},
+	checkers = {},
 }) {
 	return (
 		<div
@@ -22,16 +22,15 @@ export default function Post({
 				"w-full shadow text-xs sm:text-base flex space-y-2 flex-col items-center bg-white  p-3 rounded-xl"
 			}>
 			<Head
-				Username={Username}
-				ShareDate={ShareDate}
-				AvatarImage={AvatarImage}
-				UserID={UserID}
+				author={author}
+				publishedDate={publishedDate}
 				group={group}
+				isOwnedByUser={checkers?.owendByUser}
 			/>
 
 			<div className={"self-start  pl-4 py-3 flex justify-start items-center"}>
 				<div className={"post-content"}>
-					{Content?.split("\n")?.map((line, index) => (
+					{content?.split("\n")?.map((line, index) => (
 						<span key={index}>
 							{linkify(line)}
 							<br />
@@ -40,9 +39,9 @@ export default function Post({
 				</div>
 			</div>
 
-			<Images ImagesList={ImagesList} />
+			<Images images={images} />
 			<Divider />
-			<Reactions />
+			<Footer checkers={checkers} counters={counters} />
 		</div>
 	);
 }

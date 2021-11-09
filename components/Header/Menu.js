@@ -5,6 +5,7 @@ import {
 	MenuList,
 	MenuItem,
 	MenuDivider,
+	MenuGroup,
 	Button,
 } from "@chakra-ui/react";
 import router from "next/router";
@@ -42,21 +43,22 @@ function UserMenu() {
 						<HiUser size={"1.5em"} />
 						<span>Profile</span>
 					</MenuItem>
-					<MenuDivider />
-					<h1 className={"pl-3 text-sm"}>Switch to</h1>
-					{posts.map(
-						(profile, index) =>
-							index < 3 && (
-								<MenuItem key={index}>
-									<Avatar
-										size={"md"}
-										name={profile.name}
-										src={profile.avatar}
-									/>
-									<h1 className='text-sm ml-2'>{profile.username}</h1>
-								</MenuItem>
-							),
-					)}
+					{/* <MenuDivider />
+					<MenuGroup title='accounts'>
+						{posts.map(
+							(profile, index) =>
+								index < 3 && (
+									<MenuItem key={index}>
+										<Avatar
+											size={"md"}
+											name={profile.name}
+											src={profile.avatar}
+										/>
+										<h1 className='text-sm ml-2'>{profile.username}</h1>
+									</MenuItem>
+								),
+						)}
+					</MenuGroup> */}
 					<MenuDivider />
 					<MenuItem
 						height={50}

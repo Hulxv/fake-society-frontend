@@ -25,11 +25,10 @@ export default function Home({ posts, error }) {
 						{posts?.map((post, index) => (
 							<Post
 								key={index}
-								Username={post.author.name}
-								AvatarImage={`${process.env.NEXT_PUBLIC_API_URL}${post.author.avatar}`}
-								Content={post.content}
-								ShareDate={post.DatePublished}
-								ImagesList={post.images || null}
+								author={post?.author}
+								content={post?.content}
+								publishedDate={post?.DatePublished}
+								images={post?.images || null}
 							/>
 						))}
 						<div className={"capitalize"}>No more posts</div>
@@ -48,7 +47,7 @@ export default function Home({ posts, error }) {
 				) : (
 					<div
 						className={
-							"capitalize    flex items-center flex-col justify-center space-y-3"
+							"capitalize flex items-center flex-col justify-center space-y-3"
 						}>
 						<Lottie
 							options={{

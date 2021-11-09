@@ -9,7 +9,7 @@ import { HiSearch } from "react-icons/hi";
 // Components
 import Notifications from "./Notifications";
 import Search from "../Search";
-import UserMenu from "./UserMenu";
+import Menu from "./Menu";
 // Fake Data for testing
 
 export default function Header() {
@@ -37,7 +37,7 @@ export default function Header() {
 					<div className={"flex items-center space-x-3 "}>
 						<Notifications />
 
-						<UserMenu />
+						<Menu />
 					</div>
 				</div>
 			</div>

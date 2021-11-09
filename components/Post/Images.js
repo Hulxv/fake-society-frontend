@@ -16,15 +16,15 @@ import {
 } from "@chakra-ui/react";
 
 export default function Images(props) {
-	const { ImagesList } = props;
+	const { images } = props;
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
-		ImagesList !== null &&
-		ImagesList.length > 0 && (
+		images !== null &&
+		images.length > 0 && (
 			<div className=' flex flex-col items-center space-y-2 w-full'>
 				<div className={"w-full justify-center flex flex-wrap"}>
-					{ImagesList.map(
+					{images.map(
 						(img, index) =>
 							index <= 2 && (
 								<Zoom key={index}>
@@ -38,7 +38,7 @@ export default function Images(props) {
 					)}
 				</div>
 
-				{ImagesList.length > 3 && (
+				{images.length > 3 && (
 					<>
 						<Button onClick={onOpen} size='xs' variant='ghost'>
 							View All Images
@@ -55,7 +55,7 @@ export default function Images(props) {
 								<ModalCloseButton />
 								<ModalBody Spacing={2}>
 									<div className={"space-y-2 flex flex-col items-center"}>
-										{ImagesList.map((Image, index) => (
+										{images.map((Image, index) => (
 											<Fragment key={index}>
 												<Zoom>
 													<Img

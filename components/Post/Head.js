@@ -21,34 +21,33 @@ import {
 } from "react-icons/hi";
 
 export default function PostHead({
-	Username,
-	AvatarImage,
-	ShareDate,
+	isOwnedByUser,
+	author,
+	publishedDate,
 	group,
-	UserID,
 }) {
 	return (
 		<div className={"flex justify-between items-center w-full"}>
 			<div
 				className='flex space-x-2 self-start justify-start items-center cursor-pointer'
-				onClick={() => router.push(`/profile/${UserID}`)}>
+				onClick={() => router.push(`/profile/${author.id}`)}>
 				<div>
 					<Avatar
-						name={Username ?? ""}
-						src={AvatarImage ?? ""}
+						name={author?.name ?? ""}
+						src={`${process.env.NEXT_PUBLIC_API_URL}${author?.avatar}` ?? ""}
 						loading={"lazy"}
 					/>
 				</div>
 				<div className='flex flex-col items-start'>
 					<div className={"flex items-center space-x-1"}>
-						<span>{Username ?? ""}</span>
+						<span>{author?.name ?? ""}</span>
 
 						<Badge size={"sm"} colorScheme={"teal"}>
 							{group ?? ""}
 						</Badge>
 					</div>
 					<span className={"text-black text-opacity-40 text-xs"}>
-						{formatDistanceToNow(new Date(ShareDate ?? new Date()))}
+						{formatDistanceToNow(new Date(publishedDate ?? new Date()))}
 					</span>
 				</div>
 			</div>
@@ -69,12 +68,14 @@ export default function PostHead({
 								leftIcon={<HiOutlineBookmark size={"1.2em"} />}>
 								Save
 							</MenuItem>
-							<MenuItem
-								as={Button}
-								variant={"ghost"}
-								leftIcon={<HiOutlineTrash size={"1.2em"} />}>
-								Delete
-							</MenuItem>
+							{isOwnedByUser && (
+								<MenuItem
+									as={Button}
+									variant={"ghost"}
+									leftIcon={<HiOutlineTrash size={"1.2em"} />}>
+									Delete
+								</MenuItem>
+							)}
 							<MenuItem
 								as={Button}
 								variant={"ghost"}

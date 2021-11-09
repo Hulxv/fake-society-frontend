@@ -3,15 +3,28 @@ import Error from "../_error";
 import { GetNewToken } from "../../Auth";
 
 import Zoom from "react-medium-image-zoom";
-import { Avatar, Img, Button } from "@chakra-ui/react";
+import {
+	Avatar,
+	Img,
+	Button,
+	IconButton,
+	useBreakpointValue,
+} from "@chakra-ui/react";
 import Post from "../../components/Post";
+
+import { HiUserAdd, HiOutlineChatAlt2 } from "react-icons/hi";
 
 // Lottie Component (For Animated Icons)
 import Lottie from "react-lottie";
 import * as Globe from "../../assets/animated-icons/globe.json";
 
 export default function Profile({ profile, error, posts }) {
-	// console.log(posts);
+	const responsiveCmp = useBreakpointValue({
+		xs: "xs",
+		sm: "sm",
+		md: "md",
+	});
+
 	if (error)
 		return (
 			<Error
@@ -23,7 +36,7 @@ export default function Profile({ profile, error, posts }) {
 
 	return (
 		<div className='flex flex-col items-center space-y-5'>
-			<div className='relative w-full bg-white items-center flex flex-col py-8 px-4 rounded-lg shadow-md'>
+			<div className='relative w-full bg-white items-center flex flex-col  p-4 rounded-lg shadow-md space-y-4'>
 				<div className='w-full'>
 					<Zoom wrapStyle={{ width: "100%" }}>
 						<Img
@@ -33,15 +46,34 @@ export default function Profile({ profile, error, posts }) {
 						/>
 					</Zoom>
 				</div>
-				<div className='flex items-center space-x-3 self-start m-1'>
-					<Avatar
-						size='md'
-						src={`${process.env.NEXT_PUBLIC_API_URL}${profile.avatar}`}
-						alt=''
-					/>
-					<div className='text-xl'>{profile.name}</div>
+				<div className='flex items-center justify-between w-full '>
+					<div className='flex  items-center space-x-3'>
+						<Avatar
+							size={responsiveCmp}
+							src={`${process.env.NEXT_PUBLIC_API_URL}${profile.avatar}`}
+							alt=''
+						/>
+						<div className='text-sm sm:text-xl '>{profile.name}</div>
+					</div>
+					<div className='space-x-3 flex'>
+						<IconButton
+							icon={<HiOutlineChatAlt2 size='1.4em' />}
+							variant='ghost'
+							size={responsiveCmp}
+						/>
+						<Button
+							colorScheme='blue'
+							size={responsiveCmp}
+							leftIcon={<HiUserAdd />}>
+							Add Friend
+						</Button>
+					</div>
 				</div>
-				<div>{profile.bio}</div>
+				<div className=' flex flex-col items-start'>
+					{profile?.bio?.split("\n").map((line, index) => (
+						<span key={index}>{line}</span>
+					))}
+				</div>
 			</div>
 
 			{/* User Posts */}
@@ -55,26 +87,36 @@ export default function Profile({ profile, error, posts }) {
 						{posts?.map((post) => (
 							<Post
 								key={post.id}
-								UserID={[post.author.id]}
-								Username={post.author.name}
-								AvatarImage={`${process.env.NEXT_PUBLIC_API_URL}${post.author.avatar}`}
-								Content={post.content}
-								ShareDate={post.DatePublished}
-								ImagesList={post.images || null}
+								author={post.author}
+								content={post.content}
+								publishedDate={post.DatePublished}
+								images={post.images || []}
+								counters={{
+									reactions: post.ReactsCounter,
+									comments: post.CommentsCounter,
+									shares: post.SharesCounter,
+								}}
+								checkers={{
+									reactions: post.checking_reactions,
+									shares: posts.checking_shares,
+									owendByUser: post.checking_per,
+								}}
 							/>
 						))}
 						<div className={"capitalize"}>No more posts</div>
-						<Button
-							colorScheme={"blue"}
-							onClick={() =>
-								window.scroll({
-									top: 100,
-									left: 100,
-									behavior: "smooth",
-								})
-							}>
-							Back To Top
-						</Button>
+						{posts.length > 3 && (
+							<Button
+								colorScheme={"blue"}
+								onClick={() =>
+									window.scroll({
+										top: 100,
+										left: 100,
+										behavior: "smooth",
+									})
+								}>
+								Back To Top
+							</Button>
+						)}
 					</>
 				) : (
 					<div
@@ -112,7 +154,7 @@ export async function getServerSideProps({ req, res, query }) {
 		);
 
 		// test request
-		// console.log("data", data);
+		// console.log("data", data.data.posts);
 		if (!data.data) {
 			return {
 				notFound: true,

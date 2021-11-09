@@ -12,7 +12,9 @@ module.exports = {
 				ubuntu: ["Ubuntu", "system-ui"],
 				"josefin-sans": ["Josefin Sans", "system-ui"],
 			},
-
+			screens: {
+				xs: "352px",
+			},
 			width: {
 				100: "28rem",
 				104: "32rem",
