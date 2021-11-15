@@ -1,4 +1,6 @@
+import Error from "./_error";
 // Components
+
 import { Button } from "@chakra-ui/react";
 import Post from "../components/Post";
 import Search from "../components/Search";
@@ -12,7 +14,15 @@ import { GetNewToken } from "../Auth";
 import axios from "axios";
 
 export default function Home({ posts, error }) {
-	console.log(posts);
+	if (error)
+		return (
+			<Error
+				errMessage={error?.detail}
+				errCode={error?.code}
+				statusCode={error?.statusCode}
+			/>
+		);
+
 	return (
 		<div className={"w-full "}>
 			<div
@@ -25,10 +35,21 @@ export default function Home({ posts, error }) {
 						{posts?.map((post, index) => (
 							<Post
 								key={index}
+								postID={post.id}
 								author={post?.author}
 								content={post?.content}
 								publishedDate={post?.DatePublished}
 								images={post?.images || null}
+								counters={{
+									reactions: post.ReactsCounter,
+									comments: post.CommentsCounter,
+									shares: post.SharesCounter,
+								}}
+								checkers={{
+									reactions: post.checking_reactions,
+									shares: posts.checking_shares,
+									owendByUser: post.checking_per,
+								}}
 							/>
 						))}
 						<div className={"capitalize"}>No more posts</div>
@@ -36,7 +57,7 @@ export default function Home({ posts, error }) {
 							colorScheme={"blue"}
 							onClick={() =>
 								window.scroll({
-									top: 100,
+									top: 0,
 									left: 100,
 									behavior: "smooth",
 								})
@@ -56,7 +77,7 @@ export default function Home({ posts, error }) {
 							height={250}
 							width={250}
 						/>
-						<div>No posts is found</div>
+						<div>No recent posts</div>
 						<Search
 							taps='users'
 							Component={
@@ -76,9 +97,13 @@ export default function Home({ posts, error }) {
 
 export async function getServerSideProps({ req, res }) {
 	try {
+		if (!req.cookies.token)
+			throw {
+				statusCode: 401,
+				detail: "You can't be here without authorization. please sign in",
+			};
 		const tokens = JSON.parse(req.cookies.token);
 		await GetNewToken(tokens.refresh, tokens, res); // Set New Token
-
 		const config = {
 			headers: {
 				Authorization: `Bearer ${tokens.access}`,
@@ -90,7 +115,7 @@ export async function getServerSideProps({ req, res }) {
 		);
 
 		// test request
-		console.log("data", data);
+		// console.log("data", data);
 
 		return {
 			props: {
@@ -98,12 +123,14 @@ export async function getServerSideProps({ req, res }) {
 			},
 		};
 	} catch (err) {
-		console.log("err", err?.response);
+		//                ||
+		// For debugging  \/
+		// console.log("err", { ...err });
 		return {
 			props: {
 				error: {
-					...err?.response?.data,
-					statusCode: err?.response?.status ?? 500,
+					...(err?.response?.data || err),
+					statusCode: (err?.response?.status || err.statusCode) ?? 500,
 				},
 			},
 		};

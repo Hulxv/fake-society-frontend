@@ -5,7 +5,13 @@ import NavLink from "../NavLink";
 import Settings from "../Settings";
 import AddNewPost from "../AddNewPost";
 
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Tooltip,
+} from "@chakra-ui/react";
 import {
 	HiUserGroup,
 	HiUsers,
@@ -58,15 +64,21 @@ export default function PagesIcons({ IsSideBarOpen }) {
 						onNotActiveClassName={`sm:border-transparent sm:border-b-0 sm:border-l-4 pb-2 sm:pb-0 ${
 							IsSideBarOpen ? "sm:pl-8" : "sm:pl-2"
 						} `}>
-						<div
-							className={
-								"flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2  transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center w-full "
-							}>
-							{link.icon}
-							{(IsSideBarOpen || innerWidth < 640) && (
-								<span className={"text-xs sm:text-base"}>{link.title}</span>
-							)}
-						</div>
+						<Tooltip
+							label={!IsSideBarOpen ? link.title : ""}
+							textTransform='capitalize'
+							placement='right'
+							hasArrow>
+							<div
+								className={
+									"flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2  transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center w-full "
+								}>
+								{link.icon}
+								{(IsSideBarOpen || innerWidth < 640) && (
+									<span className={"text-xs sm:text-base"}>{link.title}</span>
+								)}
+							</div>
+						</Tooltip>
 					</NavLink>
 				))}
 

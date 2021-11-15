@@ -27,6 +27,7 @@
 		"react": "17.0.2",
 		"react-avatar-edit": "^1.0.0",
 		"react-dom": "17.0.2",
+		"react-emojione": "^5.0.1",
 		"react-flatpickr": "^3.10.7",
 		"react-hook-form": "^7.17.4",
 		"react-icons": "^4.2.0",

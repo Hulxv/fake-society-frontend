@@ -21,6 +21,7 @@ import {
 	TabList,
 	TabPanels,
 	TabPanel,
+	Tooltip,
 } from "@chakra-ui/react";
 
 import { HiAdjustments } from "react-icons/hi";
@@ -31,19 +32,24 @@ export default function Settings({ IsSideBarOpen, color }) {
 
 	return (
 		<>
-			<div
-				className='flex flex-row sm:flex-col w-full items-center capitalize'
-				onClick={onOpen}>
+			<Tooltip
+				label={!IsSideBarOpen ? "Settings" : ""}
+				placement='right'
+				hasArrow>
 				<div
-					className={`flex flex-row space-x-2 justify-center transition duration-200 cursor-pointer ${
-						color === "black" ? "text-black" : "text-white"
-					} text-opacity-80 hover:text-opacity-100 items-center`}>
-					<HiAdjustments size={"2em"} />
-					{(IsSideBarOpen || innerWidth < 640) && (
-						<span className={"text-xs sm:text-base"}>settings</span>
-					)}
+					className='flex flex-row sm:flex-col w-full items-center capitalize'
+					onClick={onOpen}>
+					<div
+						className={`flex flex-row space-x-2 justify-center transition duration-200 cursor-pointer ${
+							color === "black" ? "text-black" : "text-white"
+						} text-opacity-80 hover:text-opacity-100 items-center`}>
+						<HiAdjustments size={"2em"} />
+						{(IsSideBarOpen || innerWidth < 640) && (
+							<span className={"text-xs sm:text-base"}>settings</span>
+						)}
+					</div>
 				</div>
-			</div>
+			</Tooltip>
 
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />

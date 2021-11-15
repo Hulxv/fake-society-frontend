@@ -36,7 +36,7 @@ export default function Profile({ profile, error, posts }) {
 
 	return (
 		<div className='flex flex-col items-center space-y-5'>
-			<div className='relative w-full bg-white items-center flex flex-col  p-4 rounded-lg shadow-md space-y-4'>
+			<div className='relative w-full bg-white items-center flex flex-col  p-2 rounded-lg shadow-md space-y-4'>
 				<div className='w-full'>
 					<Zoom wrapStyle={{ width: "100%" }}>
 						<Img
@@ -87,6 +87,7 @@ export default function Profile({ profile, error, posts }) {
 						{posts?.map((post) => (
 							<Post
 								key={post.id}
+								postID={post.id}
 								author={post.author}
 								content={post.content}
 								publishedDate={post.DatePublished}
@@ -109,7 +110,7 @@ export default function Profile({ profile, error, posts }) {
 								colorScheme={"blue"}
 								onClick={() =>
 									window.scroll({
-										top: 100,
+										top: 0,
 										left: 100,
 										behavior: "smooth",
 									})
@@ -130,7 +131,7 @@ export default function Profile({ profile, error, posts }) {
 							height={250}
 							width={250}
 						/>
-						<div>No posts is found</div>
+						<div>No recent posts</div>
 					</div>
 				)}
 			</div>

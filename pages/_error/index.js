@@ -1,5 +1,5 @@
 import { Button, Heading } from "@chakra-ui/react";
-import { HiHome, HiRefresh } from "react-icons/hi";
+import { HiHome, HiRefresh, HiOutlineKey, HiKey } from "react-icons/hi";
 
 import router from "next/router";
 import Head from "next/head";
@@ -38,12 +38,21 @@ export default function Error({ statusCode, errMessage, errCode }) {
 					<div className='opacity- underline text-red-800'>{errCode}</div>
 				</div>
 
-				<Button
-					colorScheme='blue'
-					onClick={() => router.push("/")}
-					leftIcon={<HiHome />}>
-					Back Home
-				</Button>
+				{statusCode === 401 ? (
+					<Button
+						colorScheme='blue'
+						onClick={() => router.push("/auth/sign-in")}
+						leftIcon={<HiKey />}>
+						Sign in
+					</Button>
+				) : (
+					<Button
+						colorScheme='blue'
+						onClick={() => router.push("/")}
+						leftIcon={<HiHome />}>
+						Back Home
+					</Button>
+				)}
 				<Button
 					varient='ghost'
 					leftIcon={<HiRefresh />}

@@ -8,7 +8,7 @@ import AddNewPost from "../AddNewPost";
 // Icons
 import { HiArrowRight, HiArrowLeft, HiPlus } from "react-icons/hi";
 
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, Tooltip } from "@chakra-ui/react";
 
 export default function SideBar() {
 	const { innerWidth } = useWindowSize();
@@ -45,18 +45,25 @@ export default function SideBar() {
 					<div className='flex flex-col w-full items-start space-y-3'>
 						<AddNewPost
 							component={
-								<div className='flex flex-row sm:flex-col w-full items-center capitalize'>
-									<div
-										className={`flex flex-row  justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center`}>
-										<HiPlus size={"2em"} />
-										{(SideBarIsOpen || innerWidth < 640) && (
-											<span className={"text-xs sm:text-base"}>New Post</span>
-										)}
+								<Tooltip
+									label={!SideBarIsOpen ? "New Post" : ""}
+									placement='right'
+									hasArrow>
+									<div className='flex flex-row sm:flex-col w-full items-center capitalize'>
+										<div
+											className={`flex flex-row  justify-center transition duration-200 cursor-pointer text-white text-opacity-80 hover:text-opacity-100 items-center`}>
+											<HiPlus size={"2em"} />
+											{(SideBarIsOpen || innerWidth < 640) && (
+												<span className={"text-xs sm:text-base"}>New Post</span>
+											)}
+										</div>
 									</div>
-								</div>
+								</Tooltip>
 							}
 						/>
-						<Settings IsSideBarOpen={SideBarIsOpen} />
+						<Tooltip label='Settings'>
+							<Settings IsSideBarOpen={SideBarIsOpen} />
+						</Tooltip>
 					</div>
 				)}
 			</div>
