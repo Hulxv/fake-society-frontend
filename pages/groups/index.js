@@ -65,8 +65,8 @@ export default function Groups({ groups, posts }) {
 							key={index}
 							id={post.id}
 							AvatarImage={"https://via.placeholder.com/600/54176f"}
-							Username={post.title.substr(0, 15)}
-							Content={post.body}
+							author={{ name: post.title.substr(0, 15) }}
+							content={post.body}
 							ShareDate={new Date().toLocaleString()}
 							group={groups.filter((e, index) => index === I)} // For Testing
 						/>

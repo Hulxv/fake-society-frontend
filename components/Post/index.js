@@ -11,17 +11,17 @@ import { useEffect, useState } from "react";
 
 export default function Post({
 	postID,
-	author,
-	content,
-	publishedDate,
+	author = { name: "", avatar: "" },
+	content = "",
+	publishedDate = new Date(),
 	images = [],
 	group,
 	counters = {},
 	checkers = {},
 }) {
-	const [wordsCount, setwordsCount] = useState(content.split(" ").length);
+	const [linesCount, setLinesCount] = useState(content.split("\n").length);
 	const [showMore, setShowMore] = useState(false);
-	useEffect(() => console.log(wordsCount), []);
+	useEffect(() => console.log(linesCount), []);
 	return (
 		<div
 			className={
@@ -36,25 +36,25 @@ export default function Post({
 			/>
 
 			<div className={"pl-4 py-3 flex flex-col w-full"}>
-				<Collapse
-					startingHeight={40}
-					in={showMore}
-					className={`post-content text-xs sm:text-sm md:text-base`}>
+				<div className={`post-content text-xs sm:text-sm md:text-base`}>
 					<Emojify style={{ width: 20, height: 20 }}>
-						{content?.split("\n")?.map((line, index) => (
-							<span key={index}>
-								{linkify(line)}
-								<br />
-							</span>
-						))}
+						{content
+							?.slice(0, showMore ? content?.length : 100)
+							?.concat(!showMore && content?.length > 100 ? "..." : "")
+							?.split("\n")
+							?.map((line, index) => (
+								<span key={index}>
+									{linkify(line)}
+									<br />
+								</span>
+							))}
 					</Emojify>
-				</Collapse>
-				{!showMore && wordsCount > 50 && "..."}
-				{wordsCount > 50 && (
+				</div>
+				{content?.length > 20 && (
 					<Button
 						size='xs'
 						alignSelf='end'
-						justifySelf='end'
+						variant='ghost'
 						mt={1}
 						textTransform='capitalize'
 						onClick={() => setShowMore(!showMore)}>
