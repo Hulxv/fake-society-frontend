@@ -7,7 +7,7 @@ import * as Heart from "../../assets/animated-icons/HeartIcon.json";
 
 import Lottie from "react-lottie";
 import { useState } from "react";
-import { Button, useBreakpointValue } from "@chakra-ui/react";
+import { Button, useBreakpointValue, Tooltip } from "@chakra-ui/react";
 
 export default function Footer({ counters, checkers }) {
 	const [loved, setLoved] = useState(checkers.reaction ?? false);
@@ -22,34 +22,40 @@ export default function Footer({ counters, checkers }) {
 				"w-full flex justify-between capitalize text-sm sm:text-base pt-2 pl-2 pr-6"
 			}>
 			<div className='flex'>
-				<Button
-					size={ButtonSize}
-					leftIcon={
-						!loved ? (
-							<AiOutlineHeart size={"1.4em"} />
-						) : (
-							<AiFillHeart size={"1.4em"} />
-						)
-					}
-					variant='ghost'
-					onClick={() => setLoved(!loved)}>
-					<span>{counters?.reactions}</span>
-				</Button>
-				<Comments>
+				<Tooltip label='Love' hasArrow>
 					<Button
 						size={ButtonSize}
-						leftIcon={<BiComment size={"1.4em"} />}
-						variant='ghost'>
-						<span>{counters?.comments}</span>
+						leftIcon={
+							!loved ? (
+								<AiOutlineHeart size={"1.4em"} />
+							) : (
+								<AiFillHeart size={"1.4em"} />
+							)
+						}
+						variant='ghost'
+						onClick={() => setLoved(!loved)}>
+						<span>{counters?.reactions}</span>
 					</Button>
+				</Tooltip>
+				<Comments>
+					<Tooltip label='Comment' hasArrow>
+						<Button
+							size={ButtonSize}
+							leftIcon={<BiComment size={"1.4em"} />}
+							variant='ghost'>
+							<span>{counters?.comments}</span>
+						</Button>
+					</Tooltip>
 				</Comments>
 			</div>
-			<Button
-				size={ButtonSize}
-				leftIcon={<BiShare size={"1.4em"} />}
-				variant='ghost'>
-				<span>{counters?.shares}</span>
-			</Button>
+			<Tooltip label='Share' hasArrow>
+				<Button
+					size={ButtonSize}
+					leftIcon={<BiShare size={"1.4em"} />}
+					variant='ghost'>
+					<span>{counters?.shares}</span>
+				</Button>
+			</Tooltip>
 		</div>
 	);
 }

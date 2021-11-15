@@ -36,20 +36,35 @@ export default function Post({
 			/>
 
 			<div className={"pl-4 py-3 flex flex-col w-full"}>
-				<div className={`post-content text-xs sm:text-sm md:text-base`}>
+				{!showMore && (
+					<div className={`post-content text-xs sm:text-sm md:text-base`}>
+						<Emojify style={{ width: 20, height: 20 }}>
+							{content
+								?.slice(0, showMore ? content?.length : 100)
+								?.concat(!showMore && content?.length > 100 ? "..." : "")
+								?.split("\n")
+								?.map((line, index) => (
+									<span key={index}>
+										{linkify(line)}
+										<br />
+									</span>
+								))}
+						</Emojify>
+					</div>
+				)}
+				<Collapse
+					in={showMore}
+					className={`post-content text-xs sm:text-sm md:text-base`}>
 					<Emojify style={{ width: 20, height: 20 }}>
-						{content
-							?.slice(0, showMore ? content?.length : 100)
-							?.concat(!showMore && content?.length > 100 ? "..." : "")
-							?.split("\n")
-							?.map((line, index) => (
-								<span key={index}>
-									{linkify(line)}
-									<br />
-								</span>
-							))}
+						{content?.split("\n")?.map((line, index) => (
+							<span key={index}>
+								{linkify(line)}
+								<br />
+							</span>
+						))}
 					</Emojify>
-				</div>
+				</Collapse>
+
 				{content?.length > 20 && (
 					<Button
 						size='xs'
