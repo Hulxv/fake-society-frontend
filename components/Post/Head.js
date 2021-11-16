@@ -12,6 +12,7 @@ import {
 	Button,
 	Portal,
 	Badge,
+	useToast,
 } from "@chakra-ui/react";
 
 import {
@@ -35,8 +36,11 @@ export default function PostHead({
 	postID,
 }) {
 	const [deleteDialogIsOpen, setDeleteDialogIsOpen] = useState(false);
+	const [deleteReqIsLoading, setDeleteReqIsLoading] = useState(false);
+	const toast = useToast();
 
 	async function DeleteHandler() {
+		setDeleteReqIsLoading(true);
 		try {
 			const oldTokens = JSON.parse(Cookies.get("token"));
 
@@ -59,9 +63,27 @@ export default function PostHead({
 				},
 			);
 			console.log(req);
+
+			toast({
+				description: "Your post was deleted successfully.",
+				status: "success",
+				isClosable: true,
+				position: "top",
+			});
 		} catch (err) {
+			setDeleteReqIsLoading(true);
+
 			console.log({ ...err });
+			toast({
+				description: err.message,
+				status: "error",
+				isClosable: true,
+				position: "top",
+				title: err?.response?.statusText ?? "",
+			});
 		}
+		setDeleteReqIsLoading(false);
+		setDeleteDialogIsOpen(false);
 	}
 
 	return (
@@ -142,7 +164,8 @@ export default function PostHead({
 				setIsOpen={setDeleteDialogIsOpen}
 				submitBtnTitle="Yes, I'm sure"
 				cancelBtnTitle='Cancel'
-				onSubmit={DeleteHandler}>
+				onSubmit={DeleteHandler}
+				submitBtnLoading={deleteReqIsLoading}>
 				<div></div>
 			</AlertDialogComponent>
 		</>

@@ -25,6 +25,8 @@ export default function AlertDialogComponent({
 	cancelBtnTitle,
 	onSubmit = () => {},
 	onCancel = () => {},
+	submitBtnLoading = false,
+	cancelBtnLoading = false,
 }) {
 	const cancelRef = useRef();
 
@@ -56,6 +58,7 @@ export default function AlertDialogComponent({
 
 						<AlertDialogFooter>
 							<Button
+								isLoading={cancelBtnLoading}
 								ref={cancelRef}
 								onClick={() => {
 									onCancel();
@@ -64,10 +67,10 @@ export default function AlertDialogComponent({
 								{cancelBtnTitle}
 							</Button>
 							<Button
+								isLoading={submitBtnLoading}
 								colorScheme='red'
 								onClick={() => {
 									onSubmit();
-									setIsOpen(false);
 								}}
 								ml={3}>
 								{submitBtnTitle}
